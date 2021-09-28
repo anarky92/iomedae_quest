@@ -6,6 +6,7 @@ define l = Character('Мастер Сеймур', color="#0088c8")
 define i = Character('Иган', color="#AA00FF")
 define sbs = Character('Себастьян', color="#33DD00")
 define ber = Character('Капитан Бер', color="#888888")
+define heal = Character('Мастер медицины', color="#444444")
 
 # Настройки по умолчанию
 
@@ -44,7 +45,7 @@ screen monastry_map:
         hotspot (723,646,114,42) action Jump ("library_loc") # Библиотека
         hotspot (838,659,161,47) action Jump ("start") # Часовня
         hotspot (323,914,302,51) action Jump ("main_gates_loc") # Подсобное хозяйство
-        hotspot (1263,768,154,51) action Jump ("start") # Больница
+        hotspot (1263,768,154,51) action Jump ("hopital_loc") # Больница
         hotspot (1028,113,105,54) action Jump ("start") # Храм
         hotspot (1067,209,124,56) action Jump ("start") # Конюшни
         hotspot (1212,201,159,52) action Jump ("start") # Мемориал
@@ -370,6 +371,38 @@ label beaten_loc:
     hide left_fist
     scene sky
     
-    "А нехуй выебываться было"
+    "Успокоился, урод? Тащите его в лазарет, пусть заштопают"
+    
+    call hopital_loc(True)
 
     return
+    
+label hopital_loc(injured=False):
+    
+    if injured==True:
+        scene hospital_no_healer
+        show healer
+        heal "Ну все, залатали мы тебя. Освобождай койку и иди в казаму отлеживаться"
+        jump barracs_loc
+        show healer
+    else:
+        scene hospital_healer
+        $renpy.pause (1.0)
+        scene hospital_no_healer
+        show healer
+        heal "Ты чего приперся? Заболел?"
+        menu:
+            "Меня в наряд прислали":
+                heal "Иди у завхоза отрабатывай, мне тут хулиганье не нужно"
+                jump monastry_map_loc
+            "Да чего-то неважно себя чувствую":
+                heal "Давай поссмотрим..."
+                $renpy.pause (1.0)
+                heal "Вали отсюда, симулянт"
+                jump monastry_map_loc
+            "Уже хожу":
+                jump monastry_map_loc
+                
+    return    
+        
+        

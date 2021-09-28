@@ -2,13 +2,9 @@
 errors listed below, and try again.
 
 
-File "game/script.rpy", line 325: choice menuitem expects a non-empty block.
-    "Да чтоб тебя четри драли...":
-                                  ^
-
-File "game/script.rpy", line 343: choice menuitem expects a non-empty block.
-    "Да чтоб тебя четри драли...":
-                                  ^
+File "game/script.rpy", line 385: expected ':' not found.
+    else
+        ^
 
 Ren'Py Version: Ren'Py 7.4.8.1895
-Tue Sep 28 05:13:45 2021
+Tue Sep 28 16:13:20 2021
