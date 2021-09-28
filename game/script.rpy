@@ -4,6 +4,8 @@ define r = Character('Рэндал', color="#c8ffc8")
 define e = Character('Амариэ', color="#c800c8")
 define l = Character('Мастер Сеймур', color="#0088c8")
 define i = Character('Иган', color="#AA00FF")
+define sbs = Character('Себастьян', color="#33DD00")
+define ber = Character('Капитан Бер', color="#888888")
 
 # Настройки по умолчанию
 
@@ -13,6 +15,7 @@ default LibraryFirstVisit = 0
 default LocalBookPagePointer = 1
 default BookNameLocal = ""
 default CallBackLocal = ""
+default MainGatesAccessDenied = True
 
 
 # Служебные функции
@@ -40,12 +43,12 @@ screen monastry_map:
         hotspot (552,757,115,52) action Jump ("start") # Склад
         hotspot (723,646,114,42) action Jump ("library_loc") # Библиотека
         hotspot (838,659,161,47) action Jump ("start") # Часовня
-        hotspot (323,914,302,51) action Jump ("start") # Подсобное хозяйство
+        hotspot (323,914,302,51) action Jump ("main_gates_loc") # Подсобное хозяйство
         hotspot (1263,768,154,51) action Jump ("start") # Больница
         hotspot (1028,113,105,54) action Jump ("start") # Храм
         hotspot (1067,209,124,56) action Jump ("start") # Конюшни
         hotspot (1212,201,159,52) action Jump ("start") # Мемориал
-        hotspot (1491,105,104,50) action Jump ("start") # Мельница
+        hotspot (1491,105,104,50) action Jump ("main_gates_loc") # Мельница
         hotspot (1357,337,235,55) action Jump ("start") # Дом ректора
 
 screen show_png(path):
@@ -302,6 +305,71 @@ label boy_talk:
             jump library_loc
     return
             
-label book_show:
+label main_gates_loc:
+
+    scene gates_closed_guard
+   
+    $ renpy.pause(1.0)
+    
+    scene gates_closed_no_guard
+    
+    show guard_halt
+    
+    sbs "Ты куда это собрался, оборванец?"
+    
+    menu:
+    
+        "*Спокойно* Я по поручения кастеляна на ферму":
+            sbs "Ты даже не послушник. Покажи пропуск и  накладную от кастеляна"
+            menu:
+                "Да чтоб тебя четри драли...":
+                    jump monastry_map_loc
+                "Спокой развернуться и уйти":
+                    jump monastry_map_loc
+        
+        "*Раздрежнно* Иди дальше мух считай, с уменя дела. *Грубо оттолкнуть*":
+            sbs "Тревога! Капитан Бер, этот висельник пытается сбежать!"
+            jump cpatain_ber_gates_talk
+            
+    return
+    
+label cpatain_ber_gates_talk:
+
+    scene gates_closed_guard
+    
+    show captain_ber
+
+    ber "*Раздрежнно* Слышь ублюдок! А ну быстро марш к завхозу. Скажешь 3 наряда вне очереди."
+    menu:
+            "Да чтоб тебя четри драли...":
+                ber "Лови, ублюдок"
+                hide captain_ber
+                jump beaten_loc
+            "Слушаюсь, господин капитан!":
+                jump monastry_map_loc
+   
+
+    return
+    
+label beaten_loc:   
+    
+    show left_fist
+    
+    $ renpy.pause(.5)
+    
+    hide left_fist
+    show right_fist
+    
+    $ renpy.pause(.5)
+    
+    hide right_fist
+    show left_fist
+    
+    $ renpy.pause(.5)
+    
+    hide left_fist
+    scene sky
+    
+    "А нехуй выебываться было"
 
     return
