@@ -2,9 +2,9 @@
 errors listed below, and try again.
 
 
-File "game/script.rpy", line 496: Line is followed by a block, despite not being a menu choice. Did you forget a colon at the end of the line?
-    "Просто полюбоваться прелестями богини"    
-                                               ^
+File "game/script.rpy", line 81: u'Call' is not a keyword argument or valid child for the screen statement.
+    Call time_forward_h(1)
+        ^
 
 Ren'Py Version: Ren'Py 7.4.8.1895
-Tue Sep 28 22:06:14 2021
+Wed Sep 29 02:55:51 2021

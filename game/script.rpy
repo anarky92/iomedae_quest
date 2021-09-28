@@ -8,6 +8,7 @@ define sbs = Character('Себастьян', color="#33DD00")
 define ber = Character('Капитан Бер', color="#cfd483")
 define heal = Character('Мастер медицины', color="#c3f243")
 define ulm = Character('Ульм', color="#d3be53")
+define ngrd = Character('Ночной стражник', color="#530bd3")
 
 # Настройки по умолчанию
 
@@ -21,6 +22,8 @@ default LocalBookPagePointer = 1
 default BookNameLocal = ""
 default CallBackLocal = ""
 default MainGatesAccessDenied = True
+default DayCounter = 1
+default TimeCounter = 8 # Game starts at 8 am
 
 
 # Служебные функции
@@ -35,7 +38,46 @@ init python:
 
 # Игра начинается здесь:
 
+label time_forward_h(delay):
+    
+    $ TimeCounter += delay
+    if delay > 24:
+        $ renpy.display_notify("Error!To much time hop in hours!")
+        
+    if TimeCounter > 24:
+        $ TimeCounter -= 24
+        $ DayCounter += 1
+    return
+    
+label night_patrol_check:
+
+    if TimeCounter < 6:
+        jump night_patrol_catch
+    else:
+        return
+
+label night_patrol_catch:
+
+    scene monastry_yard_night_catched
+    
+    $ renpy.pause(.5)
+    
+    show quard_night_catched
+    
+    ngrd "Ты чего тут бродишь?! А ну марш в казарму, щенок!"
+    
+    call set_time_h(8)
+    
+    jump barracs_loc
+    
+label set_time_h (time):
+    
+    $ TimeCounter = time
+    
+    return
+
 screen monastry_map:
+
     imagemap:
         ground "images/map_ground.jpg"
         hover "images/map_hover.jpg"
@@ -137,6 +179,10 @@ label start:
     call screen hud_screen
 
 label monastry_map_loc:
+    
+    call time_forward_h(1)
+    
+    call night_patrol_check
     
     call screen monastry_map
 
