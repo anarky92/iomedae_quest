@@ -83,7 +83,7 @@ label book_pre_reading_loc(book_name, callback_loc):
     $ BookNameLocal = book_name # store context
     $ CallBackLocal = callback_loc
     
-    call book_reading_loc(BookNameLocal, CallBackLocal) from _call_book_reading_loc
+    call book_reading_loc(BookNameLocal, CallBackLocal)
 
 label book_reading_loc(book_name, callback_loc):
     
@@ -112,13 +112,13 @@ label page_left:
 
     $ LocalBookPagePointer -= 1
     
-    call book_reading_loc(BookNameLocal, CallBackLocal) from _call_book_reading_loc_1
+    call book_reading_loc(BookNameLocal, CallBackLocal)
     
 label page_right:
 
     $ LocalBookPagePointer += 1
     
-    call book_reading_loc(BookNameLocal, CallBackLocal) from _call_book_reading_loc_2
+    call book_reading_loc(BookNameLocal, CallBackLocal)
     
 label page_close:
 
@@ -377,7 +377,7 @@ label beaten_loc:
     
     "Успокоился, урод? Тащите его в лазарет, пусть заштопают"
     
-    call hopital_loc(True) from _call_hopital_loc
+    call hopital_loc(True)
 
     return
     
