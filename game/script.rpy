@@ -9,6 +9,7 @@ define ber = Character('Капитан Бер', color="#cfd483")
 define heal = Character('Мастер медицины', color="#c3f243")
 define ulm = Character('Ульм', color="#d3be53")
 define ngrd = Character('Ночной стражник', color="#530bd3")
+define DEBUG = True
 
 # Настройки по умолчанию
 
@@ -96,7 +97,12 @@ screen monastry_map:
         # hotspot (1067,209,124,56) action Jump ("start") # Конюшни
         # hotspot (1212,201,159,52) action Jump ("start") # Мемориал
         hotspot (1491,105,104,50) action Jump ("main_gates_loc") # Мельница
-        # hotspot (1357,337,235,55) action Jump ("start") # Дом ректора
+        # hotspot (1357,337,235,55) action Jump ("diary_main") # Дом ректора
+
+    imagebutton:
+            auto "diary_%s.png"
+            focus_mask True
+            action Jump ("diary_main")
 
 screen show_png(path):
     add path       
@@ -170,13 +176,30 @@ label page_close:
     
 label start:
 
-    show castle_far_away
+    # if DEBUG==True:
+    jump monastry_map_loc
 
-    "Добро пожаловать в монастырь Иомедэй"
+    # show castle_far_away
+
+    # "Добро пожаловать в монастырь Иомедэй"
     
-    show castle_far_away
+    # show castle_far_away
     
-    call screen hud_screen
+    # call screen hud_screen
+
+label diary_main:
+
+    hide monastry_map
+    scene diary_blank
+
+    show screen quest_list
+    
+    screen quest_list:
+        # text "Привет, мир." size 40
+        imagebutton:
+            auto "books/exit_%s.png"
+            focus_mask True
+            action Jump ("monastry_map_loc")
 
 label monastry_map_loc:
     

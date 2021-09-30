@@ -1,16 +1,16 @@
 ﻿I'm sorry, but an uncaught exception occurred.
 
-While loading <'Image' u'images/map_ground.jpg'>:
-  File "game/script.rpy", line 137, in script
+While loading <'Image' u'diary_book.png'>:
+  File "game/script.rpy", line 208, in script
     call screen monastry_map
   File "renpy/common/000statements.rpy", line 569, in execute_call_screen
     store._return = renpy.call_screen(name, *args, **kwargs)
-IOError: Couldn't find file 'images/map_ground.jpg'.
+IOError: Couldn't find file 'diary_book.png'.
 
 -- Full Traceback ------------------------------------------------------------
 
 Full traceback:
-  File "game/script.rpy", line 137, in script
+  File "game/script.rpy", line 208, in script
     call screen monastry_map
   File "renpy/ast.py", line 2010, in execute
     self.call("execute")
@@ -52,19 +52,15 @@ Full traceback:
     surf = render(child, width, height, cst, cat)
   File "render.pyx", line 170, in renpy.display.render.render
   File "render.pyx", line 263, in renpy.display.render.render
-  File "renpy/display/layout.py", line 814, in render
-    surf = render(child, width, height, cst, cat)
-  File "render.pyx", line 170, in renpy.display.render.render
-  File "render.pyx", line 263, in renpy.display.render.render
   File "renpy/display/im.py", line 607, in render
     return cache.get(self, render=True)
   File "renpy/display/im.py", line 271, in get
     surf = image.load()
   File "renpy/display/im.py", line 688, in load
     raise e
-IOError: Couldn't find file 'images/map_ground.jpg'.
+IOError: Couldn't find file 'diary_book.png'.
 
 Windows-10-10.0.19041
 Ren'Py 7.4.8.1895
 randal_may_monastry 1.0
-Tue Sep 28 16:26:30 2021
+Thu Sep 30 23:38:48 2021
