@@ -2,9 +2,9 @@
 errors listed below, and try again.
 
 
-File "game/script.rpy", line 81: u'Call' is not a keyword argument or valid child for the screen statement.
-    Call time_forward_h(1)
-        ^
+File "game/add.rpy", line 133: u'italic' is not a keyword argument or valid child for the textbutton statement.
+    italic True
+          ^
 
 Ren'Py Version: Ren'Py 7.4.8.1895
-Wed Sep 29 02:55:51 2021
+Mon Oct  4 03:13:26 2021
