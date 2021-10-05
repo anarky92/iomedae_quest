@@ -421,14 +421,14 @@ label chapel_statue_loc:
     
     scene chapel_statue_bg
 
-    if IomedaeOldFirstVisit == 0:
+    if IomedaeOldFirstVisit == 0 and IomedaeStatueInfoFirstVisit == 1:
         $ IomedaeOldFirstVisit = 1
         r "Ничего себе богиня. Хороша. Такой можно и послужить *Усмехнулся*"
         r "*Лицо стало серьёзней* Спасибо тебе, что приютила, прекрасная воительница."
         
     menu:
     
-        "Помолиться":
+        "Помолиться" if IomedaeStatueInfoFirstVisit == 1:
             r "Солнце, купи мне гитару"
             r "Научи курить план"
             r "Не раскачивай Землю,"
@@ -436,10 +436,13 @@ label chapel_statue_loc:
             r "Пивом проставь, да прокляни сушняк"
             r "Вобщем, сделай так чтобы всё было ништяк"
             jump chapel_loc
-        "Просто полюбоваться прелестями богини":   
+        "Просто полюбоваться прелестями богини" if IomedaeStatueInfoFirstVisit == 1:   
             $ renpy.pause(5)
             jump chapel_loc
-        "В следующий раз":
+        "Полюбоваться прелестями статуи" if IomedaeStatueInfoFirstVisit == 0:   
+            $ renpy.pause(5)
+            jump chapel_loc
+        "В следующий раз" :
             jump chapel_loc
 
     return
