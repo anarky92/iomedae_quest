@@ -1,26 +1,40 @@
 ﻿I'm sorry, but an uncaught exception occurred.
 
-While running game code:
-  File "game/script.rpy", line 53, in script call
-    call diary_main
-  File "game/script.rpy", line 53, in script call
-    call diary_main
-ScriptError: could not find label 'diary_main'.
+After initialization, but before game start.
+  File "renpy/common/00start.rpy", line 80, in _init_language
+    renpy.change_language(language)
+  File "game/add.rpy", line 139, in <module>
+    font AmadeusAP
+NameError: name 'AmadeusAP' is not defined
 
 -- Full Traceback ------------------------------------------------------------
 
 Full traceback:
-  File "game/script.rpy", line 53, in script call
-    call diary_main
-  File "renpy/ast.py", line 1485, in execute
-    rv = renpy.game.context().call(label, return_site=self.next.name)
-  File "game/script.rpy", line 53, in script call
-    call diary_main
-  File "renpy/script.py", line 918, in lookup
-    raise ScriptError("could not find label '%s'." % str(original))
-ScriptError: could not find label 'diary_main'.
+  File "renpy/bootstrap.py", line 326, in bootstrap
+    renpy.main.main()
+  File "renpy/main.py", line 617, in main
+    run(restart)
+  File "renpy/main.py", line 78, in run
+    renpy.translation.init_translation()
+  File "renpy/translation/__init__.py", line 561, in init_translation
+    renpy.store._init_language() # @UndefinedVariable
+  File "renpy/common/00start.rpy", line 80, in _init_language
+    renpy.change_language(language)
+  File "renpy/translation/__init__.py", line 645, in change_language
+    new_change_language(tl, language)
+  File "renpy/translation/__init__.py", line 607, in new_change_language
+    i.apply()
+  File "renpy/ast.py", line 2670, in apply
+    value = renpy.python.py_eval(expr)
+  File "renpy/python.py", line 2266, in py_eval
+    return py_eval_bytecode(code, globals, locals)
+  File "renpy/python.py", line 2259, in py_eval_bytecode
+    return eval(bytecode, globals, locals)
+  File "game/add.rpy", line 139, in <module>
+    font AmadeusAP
+NameError: name 'AmadeusAP' is not defined
 
 Windows-10-10.0.19041
 Ren'Py 7.4.8.1895
 randal_may_monastry 1.0
-Mon Oct  4 03:02:40 2021
+Tue Oct  5 21:54:04 2021

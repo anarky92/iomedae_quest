@@ -7,6 +7,18 @@ init python:
         else:
             return 0
     
+    def GetQuestDescription (QuestName):
+        if QuestName == "Сдать зачет по дьявольскому":
+            return PassExamDevilLangDescrText
+        elif QuestName == "Принести кастеляну масло":
+            return BringOilToCastellanDescrText
+        elif QuestName == "Найти Ульму пожрать":
+            return FindFoodForUlmDescrText
+        else:
+            return "Эээм... хз че тут делать надо"
+        
+            
+    
 label time_forward_h(delay):
     
     $ TimeCounter += delay
@@ -119,24 +131,50 @@ label book_reading_loc(book_name, callback_loc):
                 auto "books/right_arrow_%s.png"
                 focus_mask True
                 action Jump ("page_right")
+
+style diary_button_text:
+    color "#000000"
+    hover_color "#FF0000"
+    size 40
+    font "AmadeusAP.ttf"
+   
+style diary_detailed_text:
+    font "AmadeusAP.ttf"  
             
 label diary_main_loc:
 
     call screen quest_list_scene
-    
+        
     screen quest_list_scene:
         modal True
         add ("diary_blank.png")
-        vbox:
-            xalign .15
+        vbox:            
+            xalign .2
             yalign .1
-            textbutton "Квест 1":
-                action Jump ("monastry_map_loc")
-            textbutton "Квест 2":
-                action Jump ("monastry_map_loc")
+            for x in QuestListActive:
+                textbutton x text_style "diary_button_text":
+                    action Call ("quest_descr_label", x)
+                # textbutton x text_color "#000000" text_hover_color "#FF0000" action Call ("quest_descr_label", x)
         imagebutton:
             auto "books/exit_%s.png"
             focus_mask True
             action Jump ("monastry_map_loc")
     
-       
+label quest_descr_label(QuestName):
+
+
+    call screen quest_descr_screen
+    
+    screen quest_descr_screen:
+        modal True
+        add ("diary_blank.png")
+        vbox:
+            text GetQuestDescription(QuestName) color "000000" area (265, 122, 625, 752) italic True style "diary_detailed_text"
+        imagebutton:
+            auto "books/left_arrow_%s.png" 
+            focus_mask True
+            action Jump ("diary_main_loc")
+        imagebutton:
+            auto "books/exit_%s.png"
+            focus_mask True
+            action Jump ("monastry_map_loc")            

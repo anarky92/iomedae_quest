@@ -24,7 +24,11 @@ default BookNameLocal = ""
 default CallBackLocal = ""
 default MainGatesAccessDenied = True
 default DayCounter = 1
-default TimeCounter = 8 # Game starts at 8 am        
+default TimeCounter = 8 # Game starts at 8 am
+
+default QuestListActive = ["Сдать зачет по дьявольскому", "Принести кастеляну масло"]
+default QuestListPassed = []
+
 
 # Игра начинается здесь:
               
@@ -391,12 +395,14 @@ label chapel_monk_talk:
                 ulm "*Мрачно* Ага"
                 hide chapel_monk
                 jump chapel_loc
-            "Тебе может помочь чем?":
+                # TODO here we need quest exist check function
+            "Тебе может помочь чем?" if "Найти Ульму пожрать" not in QuestListPassed and "Найти Ульму пожрать" not in QuestListActive:
                 r "Тебе может помочь чем?"
                 ulm "Пожрать бы чего-нибудь"
                 r "Придумаю чего-нибудь"
                 ulm "Спасибо, Рэндал"
                 r "Бывай"
+                $ QuestListActive.append("Найти Ульму пожрать")
                 hide chapel_monk
                 jump chapel_loc
                 

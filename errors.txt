@@ -2,9 +2,9 @@
 errors listed below, and try again.
 
 
-File "game/add.rpy", line 133: u'italic' is not a keyword argument or valid child for the textbutton statement.
-    italic True
-          ^
+File "game/add.rpy", line 135: style statement expects a non-empty block.
+    style diary_button_text:
+                            ^
 
 Ren'Py Version: Ren'Py 7.4.8.1895
-Mon Oct  4 03:13:26 2021
+Tue Oct  5 22:21:18 2021
