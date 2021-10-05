@@ -2,9 +2,9 @@
 errors listed below, and try again.
 
 
-File "game/add.rpy", line 135: style statement expects a non-empty block.
-    style diary_button_text:
-                            ^
+File "game/add.rpy", line 177: u'text_style' is not a keyword argument or valid child for the text statement.
+    text x text_style "diary_detailed_text" 
+                     ^
 
 Ren'Py Version: Ren'Py 7.4.8.1895
-Tue Oct  5 22:21:18 2021
+Wed Oct  6 00:54:00 2021

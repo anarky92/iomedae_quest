@@ -67,7 +67,7 @@ screen monastry_map:
         hotspot (594,220,162,53) action Jump ("barracs_loc") # Спальни
         hotspot (323,326,116,51) action Jump ("classes_loc") # Классы
         # hotspot (394,526,139,53) action Jump ("start") # Трапезная
-        # hotspot (352,703,102,52) action Jump ("start") # Кухня
+        hotspot (352,703,102,52) action Jump ("kitchen_loc") # Кухня
         # hotspot (552,757,115,52) action Jump ("start") # Склад
         hotspot (723,646,114,42) action Jump ("library_loc") # Библиотека
         hotspot (838,659,161,47) action Jump ("chapel_loc") # Часовня
@@ -154,11 +154,36 @@ label diary_main_loc:
             for x in QuestListActive:
                 textbutton x text_style "diary_button_text":
                     action Call ("quest_descr_label", x)
-                # textbutton x text_color "#000000" text_hover_color "#FF0000" action Call ("quest_descr_label", x)
         imagebutton:
             auto "books/exit_%s.png"
             focus_mask True
             action Jump ("monastry_map_loc")
+        imagebutton:
+            auto "books/bag_%s.png"
+            focus_mask True
+            action Jump ("inventory_show")            
+            
+label inventory_show:
+
+    call screen items_list_scene
+        
+    screen items_list_scene:
+        modal True
+        add ("diary_blank.png")
+        vbox:            
+            xalign .2
+            yalign .1
+            for x in InventoryList:
+                text x style "diary_detailed_text" color "000000"
+        imagebutton:
+            auto "books/exit_%s.png"
+            focus_mask True
+            action Jump ("monastry_map_loc")
+        imagebutton:
+            auto "books/left_arrow_%s.png"
+            focus_mask True
+            action Jump ("diary_main_loc")      
+
     
 label quest_descr_label(QuestName):
 

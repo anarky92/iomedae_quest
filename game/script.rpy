@@ -9,6 +9,7 @@ define ber = Character('Капитан Бер', color="#cfd483")
 define heal = Character('Мастер медицины', color="#c3f243")
 define ulm = Character('Ульм', color="#d3be53")
 define ngrd = Character('Ночной стражник', color="#530bd3")
+define cook = Character('Повар', color="#e95502")
 define DEBUG = True
 
 # Настройки по умолчанию
@@ -17,6 +18,7 @@ default ClassesFirstVisit = 0
 default BarracsFirstVisit = 0
 default LibraryFirstVisit = 0
 default ChapelFirstVisit = 0
+default KitchenFirstVisit = 0
 default IomedaeStatueInfoFirstVisit = 0
 default IomedaeOldFirstVisit = 0
 default LocalBookPagePointer = 1
@@ -28,6 +30,7 @@ default TimeCounter = 8 # Game starts at 8 am
 
 default QuestListActive = ["Сдать зачет по дьявольскому", "Принести кастеляну масло"]
 default QuestListPassed = []
+default InventoryList = []
 
 
 # Игра начинается здесь:
@@ -405,7 +408,13 @@ label chapel_monk_talk:
                 $ QuestListActive.append("Найти Ульму пожрать")
                 hide chapel_monk
                 jump chapel_loc
-                
+            "Я тут тебе пожрать притаранил" if "Найти Ульму пожрать" in QuestListActive and "Колбаса с кухни" in InventoryList:
+                ulm "Спасибо, Рэндал!"
+                r "Да незачто, бывай"
+                $ QuestListPassed.append("Найти Ульму пожрать")
+                $ QuestListActive.remove("Найти Ульму пожрать")
+                $ InventoryList.remove("Колбаса с кухни")
+                jump chapel_loc
     return
                 
 label chapel_statue_loc:
@@ -434,3 +443,54 @@ label chapel_statue_loc:
             jump chapel_loc
 
     return
+    
+label kitchen_loc:
+
+    scene kitchen_bg_cook
+    
+    if KitchenFirstVisit == 0:
+        $ KitchenFirstVisit = 1
+        r " *Принюхивается* Аж слюнки потекли..."
+
+    call screen kitchen_nav
+        
+    screen kitchen_nav:    
+        modal True
+        imagebutton auto "kitchen/kitchen_basket_%s.png" focus_mask True action Jump ("kitchen_steal_food_loc")
+        imagebutton auto "kitchen/cook_%s.png" focus_mask True action Jump ("kitchen_cook_talk_loc")
+        imagebutton auto "kitchen/exit_%s.png" focus_mask True action Jump ("monastry_map_loc")
+        
+label kitchen_steal_food_loc:
+
+    scene kitchen_bg_cook
+    
+    menu :
+        "Кажется я могу незаметно свистнуть колбасу..."
+        
+        "Ну нафиг":
+            jump kitchen_loc
+            
+        "Было ваше стало наше" if "Колбаса с кухни" not in InventoryList:
+            $ InventoryList.append("Колбаса с кухни")
+            jump kitchen_loc
+            
+label kitchen_cook_talk_loc:
+
+    scene kitchen_bg_no_cook
+    
+    show cook
+    
+    cook "Чего надо?"
+    
+    menu:
+    
+        "Можно у вас чего-нибудь попросить поесть?":
+            cook "*Раздраженно* Вали отсюда. Есть будешь со всеми. Если заслужишь"
+            jump kitchen_loc
+            
+        "Там в часовне послушник Ульм на дежурсве с голоду пухнет. Можно для него паек получить?":
+            cook "*Раздраженно* Ты кого надурить вздумал? Вали отсюда, проходимец!"
+            jump kitchen_loc
+
+        
+    
