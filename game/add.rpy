@@ -64,8 +64,7 @@ label interloc_time_advance(NextLocation):
     call time_forward_h(1)
     
     call night_patrol_check
-
-    # jump(NextLocation)
+    
     $ renpy.jump(NextLocation)
 
 screen monastry_map:
@@ -79,12 +78,6 @@ screen monastry_map:
     if TimeCounter12 == 12:
         $ TimeCounter12 = 0
         
-    # imagebutton:
-            # idle "images/map_ground.jpg"
-            # hover "images/map_hover.jpg"
-            # area (594,220,162,53)
-            # action Jump ("diary_main_loc")
-
     imagemap:
         ground "images/map_ground.jpg"
         hover "images/map_hover.jpg"
@@ -112,7 +105,6 @@ screen monastry_map:
     imagebutton:
             auto "diary_%s.png"
             focus_mask True
-            # action Jump ("monastry_map_loc")
             action Jump ("diary_main_loc")
             
     

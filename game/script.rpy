@@ -86,10 +86,6 @@ label start:
 
 label monastry_map_loc:
     
-    # call time_forward_h(1)
-    
-    # call night_patrol_check
-    
     call screen monastry_map
 
 label classes_loc:
