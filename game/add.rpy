@@ -59,29 +59,43 @@ label set_time_h (time):
     
     return
 
+label interloc_time_advance(NextLocation):
+
+    call time_forward_h(1)
+    
+    call night_patrol_check
+
+    # jump(NextLocation)
+    $ renpy.jump(NextLocation)
+
 screen monastry_map:
 
     add "map_ground.jpg"
 
     $ TimeCounter12 = TimeCounter
     
-    if TimeCounter > 12:
+    if TimeCounter >= 12:
         $ TimeCounter12 = TimeCounter - 12
-    elif TimeCounter == 24:
+    if TimeCounter12 == 12:
         $ TimeCounter12 = 0
         
+    # imagebutton:
+            # idle "images/map_ground.jpg"
+            # hover "images/map_hover.jpg"
+            # area (594,220,162,53)
+            # action Jump ("diary_main_loc")
 
     imagemap:
         ground "images/map_ground.jpg"
         hover "images/map_hover.jpg"
-        hotspot (594,220,162,53) action Jump ("barracs_loc") # Спальни
-        hotspot (323,326,116,51) action Jump ("classes_loc") # Классы
-        hotspot (352,703,102,52) action Jump ("kitchen_loc") # Кухня
-        hotspot (723,646,114,42) action Jump ("library_loc") # Библиотека
-        hotspot (838,659,161,47) action Jump ("chapel_loc") # Часовня
-        hotspot (323,914,302,51) action Jump ("main_gates_loc") # Подсобное хозяйство
-        hotspot (1263,768,154,51) action Jump ("hopital_loc") # Больница
-        hotspot (1491,105,104,50) action Jump ("main_gates_loc") # Мельница
+        hotspot (594,220,162,53) action Call ("interloc_time_advance", "barracs_loc") # Спальни
+        hotspot (323,326,116,51) action Call ("interloc_time_advance", "classes_loc") # Классы
+        hotspot (352,703,102,52) action Call ("interloc_time_advance", "kitchen_loc") # Кухня
+        hotspot (723,646,114,42) action Call ("interloc_time_advance", "library_loc") # Библиотека
+        hotspot (838,659,161,47) action Call ("interloc_time_advance", "chapel_loc") # Часовня
+        hotspot (323,914,302,51) action Call ("interloc_time_advance", "main_gates_loc") # Подсобное хозяйство
+        hotspot (1263,768,154,51) action Call ("interloc_time_advance", "hopital_loc") # Больница
+        hotspot (1491,105,104,50) action Call ("interloc_time_advance", "main_gates_loc") # Мельница
 
         # hotspot (353,140,157,56) action Jump ("start") # Гостевой дом
         # hotspot (685,76,270,52) action Jump ("start") # Дом преподавателей
@@ -98,6 +112,7 @@ screen monastry_map:
     imagebutton:
             auto "diary_%s.png"
             focus_mask True
+            # action Jump ("monastry_map_loc")
             action Jump ("diary_main_loc")
             
     
@@ -158,6 +173,11 @@ style diary_button_text:
    
 style diary_detailed_text:
     font "AmadeusAP.ttf"  
+
+label quest_complete_label(closed_quest_name):
+
+    $ QuestListPassed.append(closed_quest_name)
+    $ QuestListActive.remove(closed_quest_name)
             
 label diary_main_loc:
 

@@ -10,7 +10,7 @@ define heal = Character('Мастер медицины', color="#c3f243")
 define ulm = Character('Ульм', color="#d3be53")
 define ngrd = Character('Ночной стражник', color="#530bd3")
 define cook = Character('Повар', color="#e95502")
-define DEBUG = True
+define DEBUG = False
 
 # Настройки по умолчанию
 
@@ -84,16 +84,11 @@ label start:
     
     call screen hud_screen
 
-label quest_complete_label(closed_quest_name):
-
-    $ QuestListPassed.append(closed_quest_name)
-    $ QuestListActive.remove(closed_quest_name)
-
 label monastry_map_loc:
     
-    call time_forward_h(1)
+    # call time_forward_h(1)
     
-    call night_patrol_check
+    # call night_patrol_check
     
     call screen monastry_map
 

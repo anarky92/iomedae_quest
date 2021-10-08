@@ -2,9 +2,9 @@
 errors listed below, and try again.
 
 
-File "game/add.rpy", line 76: u'Call' is not a keyword argument or valid child for the hotspot statement.
-    Call time_forward_h(1) 
+File "game/add.rpy", line 68: expected 'label_name' not found.
+    jump(NextLocation)
         ^
 
 Ren'Py Version: Ren'Py 7.4.8.1895
-Fri Oct  8 02:59:19 2021
+Fri Oct  8 03:48:14 2021
