@@ -27,6 +27,23 @@ default CallBackLocal = ""
 default MainGatesAccessDenied = True
 default DayCounter = 1
 default TimeCounter = 8 # Game starts at 8 am
+# Skills
+
+default RadalStr = 10
+default RadalDex = 10
+default RadalWiz = 10
+default RadalInt = 10
+default RadalStm = 10
+
+default RandalDevilLangKnow = 0
+default RandalReligKnow = 0
+default RandalPlanKnow = 0
+default RandalHistoryKnow = 0
+
+default RandalGood = 50 # Neutral
+default RandalLawful = 85 # Lawful
+
+default RandalStatus = "Испытательный срок"
 
 default QuestListActive = ["Сдать зачет по дьявольскому", "Принести кастеляну масло"]
 default QuestListPassed = []
@@ -67,6 +84,11 @@ label start:
     
     call screen hud_screen
 
+label quest_complete_label(closed_quest_name):
+
+    $ QuestListPassed.append(closed_quest_name)
+    $ QuestListActive.remove(closed_quest_name)
+
 label monastry_map_loc:
     
     call time_forward_h(1)
@@ -82,10 +104,6 @@ label classes_loc:
             "Приятная тиниша и прохлада класса накрыли Рэндала"
             $ ClassesFirstVisit = 1
         
-        # call screen hud_screen
-        
-        # show classes
-        
         call screen monk_talk
 
         screen monk_talk():
@@ -93,9 +111,10 @@ label classes_loc:
             add "classes"
             modal True
             
-            imagebutton auto "classes_%s.png" focus_mask True action Jump ("talk_to_monk")
-            
+            imagebutton auto "classes_%s.png" focus_mask True action Jump ("talk_to_monk")            
             imagebutton auto "classes_door_%s.png" focus_mask True action Jump ("monastry_map_loc")
+            imagebutton auto "classes/table_%s.png" focus_mask True action Jump ("classes_study_loc")
+            imagebutton auto "classes/hexenhammer_%s.png" focus_mask True action Call ("book_pre_reading_loc","classes/hexenhammer_","classes_loc")
             
         return
         
@@ -108,7 +127,9 @@ label talk_to_monk:
     menu:
         "Вы готовы к сдаче зачета?"
         
-        "Да":
+        "Да" if RandalDevilLangKnow >= 10:
+            call quest_complete_label("Сдать зачет по дьявольскому")
+            call time_forward_h(1)
             jump monastry_map_loc
             
         "Нет":
@@ -137,6 +158,7 @@ label barracs_loc:
         imagebutton auto "barracs_bg_elv_%s.png" focus_mask True action Jump ("elv_talk_loc")
         
         imagebutton auto "barracs/barracs_book_%s.png" focus_mask True action Call ("book_pre_reading_loc","books/barracs_iomedae_","barracs_loc")
+        imagebutton auto "barracs/randal_bed_%s.png" focus_mask True action Jump ("barracs_sleep_loc")
         
     return
 
@@ -495,5 +517,34 @@ label kitchen_cook_talk_loc:
             cook "*Раздраженно* Ты кого надурить вздумал? Вали отсюда, проходимец!"
             jump kitchen_loc
 
-        
+label classes_study_loc:
+
+    menu:
     
+        "Ботать дьявольский" if RandalDevilLangKnow < 10:
+            call time_forward_h(8)
+            $ RandalDevilLangKnow += 1
+            jump classes_loc
+        "Да ну его нафиг, заебался в корень":
+            jump classes_loc
+    
+    
+label barracs_sleep_loc:
+
+    menu:
+    
+        "Спать до утра":
+            call time_forward_h(8 + (24 - TimeCounter))
+            scene randal_sleep with fade
+            $ renpy.pause(1)
+            jump barracs_loc
+        "Спать 1 час":
+            call time_forward_h(1)
+            scene randal_sleep with fade
+            $ renpy.pause(1)
+            jump barracs_loc
+        "Спать 8 часов":
+            call time_forward_h(8)
+            scene randal_sleep with fade
+            $ renpy.pause(1)
+            jump barracs_loc

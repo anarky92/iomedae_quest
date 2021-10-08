@@ -4,6 +4,8 @@ init python:
     def GetBookLen (book_name):
         if book_name == "books/barracs_iomedae_":
             return 3
+        if book_name == "classes/hexenhammer_":
+            return 4
         else:
             return 0
     
@@ -59,30 +61,44 @@ label set_time_h (time):
 
 screen monastry_map:
 
+    add "map_ground.jpg"
+
+    $ TimeCounter12 = TimeCounter
+    
+    if TimeCounter > 12:
+        $ TimeCounter12 = TimeCounter - 12
+        
+
     imagemap:
         ground "images/map_ground.jpg"
         hover "images/map_hover.jpg"
-        # hotspot (353,140,157,56) action Jump ("start") # Гостевой дом
-        # hotspot (685,76,270,52) action Jump ("start") # Дом преподавателей
         hotspot (594,220,162,53) action Jump ("barracs_loc") # Спальни
         hotspot (323,326,116,51) action Jump ("classes_loc") # Классы
-        # hotspot (394,526,139,53) action Jump ("start") # Трапезная
         hotspot (352,703,102,52) action Jump ("kitchen_loc") # Кухня
-        # hotspot (552,757,115,52) action Jump ("start") # Склад
         hotspot (723,646,114,42) action Jump ("library_loc") # Библиотека
         hotspot (838,659,161,47) action Jump ("chapel_loc") # Часовня
         hotspot (323,914,302,51) action Jump ("main_gates_loc") # Подсобное хозяйство
         hotspot (1263,768,154,51) action Jump ("hopital_loc") # Больница
+        hotspot (1491,105,104,50) action Jump ("main_gates_loc") # Мельница
+
+        # hotspot (353,140,157,56) action Jump ("start") # Гостевой дом
+        # hotspot (685,76,270,52) action Jump ("start") # Дом преподавателей
+        # hotspot (394,526,139,53) action Jump ("start") # Трапезная
+        # hotspot (552,757,115,52) action Jump ("start") # Склад
         # hotspot (1028,113,105,54) action Jump ("start") # Храм
         # hotspot (1067,209,124,56) action Jump ("start") # Конюшни
         # hotspot (1212,201,159,52) action Jump ("start") # Мемориал
-        hotspot (1491,105,104,50) action Jump ("main_gates_loc") # Мельница
         # hotspot (1357,337,235,55) action Jump ("diary_main_loc") # Дом ректора
+
+
+    add "clock_" + str(TimeCounter12) + ".png" xzoom 0.25 yzoom 0.25 xpos 1700
 
     imagebutton:
             auto "diary_%s.png"
             focus_mask True
             action Jump ("diary_main_loc")
+            
+    
 
 screen hud_screen:
     zorder 100

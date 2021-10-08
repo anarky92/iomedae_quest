@@ -1,40 +1,70 @@
 ﻿I'm sorry, but an uncaught exception occurred.
 
-After initialization, but before game start.
-  File "renpy/common/00start.rpy", line 80, in _init_language
-    renpy.change_language(language)
-  File "game/add.rpy", line 139, in <module>
-    font AmadeusAP
-NameError: name 'AmadeusAP' is not defined
+While running game code:
+  File "game/script.rpy", line 77, in script call
+    call diary_main_loc
+  File "game/script.rpy", line 98, in script
+    call screen monastry_map
+  File "renpy/common/000statements.rpy", line 569, in execute_call_screen
+    store._return = renpy.call_screen(name, *args, **kwargs)
+  File "game/add.rpy", line 62, in execute
+    screen monastry_map:
+  File "game/add.rpy", line 62, in execute
+    screen monastry_map:
+  File "game/add.rpy", line 71, in execute
+    add "clock_" + TimeCounter12 + ".png"
+  File "game/add.rpy", line 71, in <module>
+    add "clock_" + TimeCounter12 + ".png"
+TypeError: coercing to Unicode: need string or buffer, int found
 
 -- Full Traceback ------------------------------------------------------------
 
 Full traceback:
-  File "renpy/bootstrap.py", line 326, in bootstrap
-    renpy.main.main()
-  File "renpy/main.py", line 617, in main
-    run(restart)
-  File "renpy/main.py", line 78, in run
-    renpy.translation.init_translation()
-  File "renpy/translation/__init__.py", line 561, in init_translation
-    renpy.store._init_language() # @UndefinedVariable
-  File "renpy/common/00start.rpy", line 80, in _init_language
-    renpy.change_language(language)
-  File "renpy/translation/__init__.py", line 645, in change_language
-    new_change_language(tl, language)
-  File "renpy/translation/__init__.py", line 607, in new_change_language
-    i.apply()
-  File "renpy/ast.py", line 2670, in apply
-    value = renpy.python.py_eval(expr)
-  File "renpy/python.py", line 2266, in py_eval
-    return py_eval_bytecode(code, globals, locals)
-  File "renpy/python.py", line 2259, in py_eval_bytecode
-    return eval(bytecode, globals, locals)
-  File "game/add.rpy", line 139, in <module>
-    font AmadeusAP
-NameError: name 'AmadeusAP' is not defined
+  File "game/script.rpy", line 77, in script call
+    call diary_main_loc
+  File "game/script.rpy", line 98, in script
+    call screen monastry_map
+  File "renpy/ast.py", line 2010, in execute
+    self.call("execute")
+  File "renpy/ast.py", line 1998, in call
+    return renpy.statements.call(method, parsed, *args, **kwargs)
+  File "renpy/statements.py", line 278, in call
+    return method(parsed, *args, **kwargs)
+  File "renpy/common/000statements.rpy", line 569, in execute_call_screen
+    store._return = renpy.call_screen(name, *args, **kwargs)
+  File "renpy/exports.py", line 3132, in call_screen
+    rv = renpy.ui.interact(mouse="screen", type="screen", roll_forward=roll_forward)
+  File "renpy/ui.py", line 298, in interact
+    rv = renpy.game.interface.interact(roll_forward=roll_forward, **kwargs)
+  File "renpy/display/core.py", line 3276, in interact
+    repeat, rv = self.interact_core(preloads=preloads, trans_pause=trans_pause, pause=pause, pause_start=pause_start, **kwargs)
+  File "renpy/display/core.py", line 3694, in interact_core
+    root_widget.visit_all(lambda i : i.per_interact())
+  File "renpy/display/core.py", line 568, in visit_all
+    d.visit_all(callback, seen)
+  File "renpy/display/core.py", line 568, in visit_all
+    d.visit_all(callback, seen)
+  File "renpy/display/core.py", line 568, in visit_all
+    d.visit_all(callback, seen)
+  File "renpy/display/screen.py", line 432, in visit_all
+    callback(self)
+  File "renpy/display/core.py", line 3694, in <lambda>
+    root_widget.visit_all(lambda i : i.per_interact())
+  File "renpy/display/screen.py", line 443, in per_interact
+    self.update()
+  File "renpy/display/screen.py", line 631, in update
+    self.screen.function(**self.scope)
+  File "game/add.rpy", line 62, in execute
+    screen monastry_map:
+  File "game/add.rpy", line 62, in execute
+    screen monastry_map:
+  File "game/add.rpy", line 71, in execute
+    add "clock_" + TimeCounter12 + ".png"
+  File "game/add.rpy", line 71, in <module>
+    add "clock_" + TimeCounter12 + ".png"
+TypeError: coercing to Unicode: need string or buffer, int found
 
 Windows-10-10.0.19041
 Ren'Py 7.4.8.1895
 randal_may_monastry 1.0
-Tue Oct  5 21:54:04 2021
+Fri Oct  8 02:41:47 2021

@@ -2,9 +2,9 @@
 errors listed below, and try again.
 
 
-File "game/add.rpy", line 177: u'text_style' is not a keyword argument or valid child for the text statement.
-    text x text_style "diary_detailed_text" 
-                     ^
+File "game/add.rpy", line 76: u'Call' is not a keyword argument or valid child for the hotspot statement.
+    Call time_forward_h(1) 
+        ^
 
 Ren'Py Version: Ren'Py 7.4.8.1895
-Wed Oct  6 00:54:00 2021
+Fri Oct  8 02:59:19 2021
