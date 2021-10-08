@@ -524,6 +524,7 @@ label classes_study_loc:
         "Ботать дьявольский" if RandalDevilLangKnow < 10:
             call time_forward_h(8)
             $ RandalDevilLangKnow += 1
+            with fade
             jump classes_loc
         "Да ну его нафиг, заебался в корень":
             jump classes_loc

@@ -67,6 +67,8 @@ screen monastry_map:
     
     if TimeCounter > 12:
         $ TimeCounter12 = TimeCounter - 12
+    elif TimeCounter == 24:
+        $ TimeCounter12 = 0
         
 
     imagemap:
