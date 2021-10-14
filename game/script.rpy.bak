@@ -8,6 +8,9 @@ define sbs = Character('Себастьян', color="#33DD00")
 define ber = Character('Капитан Бер', color="#cfd483")
 define heal = Character('Мастер медицины', color="#c3f243")
 define ulm = Character('Ульм', color="#d3be53")
+define ngrd = Character('Ночной стражник', color="#530bd3")
+define cook = Character('Повар', color="#e95502")
+define DEBUG = False
 
 # Настройки по умолчанию
 
@@ -15,110 +18,52 @@ default ClassesFirstVisit = 0
 default BarracsFirstVisit = 0
 default LibraryFirstVisit = 0
 default ChapelFirstVisit = 0
+default KitchenFirstVisit = 0
 default IomedaeStatueInfoFirstVisit = 0
 default IomedaeOldFirstVisit = 0
 default LocalBookPagePointer = 1
 default BookNameLocal = ""
 default CallBackLocal = ""
 default MainGatesAccessDenied = True
+default DayCounter = 1
+default TimeCounter = 8 # Game starts at 8 am
+# Skills
 
+default RadalStr = 10
+default RadalDex = 10
+default RadalWiz = 10
+default RadalInt = 10
+default RadalStm = 10
 
-# Служебные функции
+default RandalDevilLangKnow = 0
+default RandalReligKnow = 0
+default RandalPlanKnow = 0
+default RandalHistoryKnow = 0
 
-init python:
-    def GetBookLen (book_name):
-        if book_name == "books/barracs_iomedae_":
-            return 3
-        else:
-            return 0
-        
+default RandalGood = 50 # Neutral
+default RandalLawful = 85 # Lawful
+
+default RandalStatus = "Испытательный срок"
+
+default QuestListActive = ["Сдать зачет по дьявольскому", "Принести кастеляну масло"]
+default QuestListPassed = []
+default InventoryList = []
+
 
 # Игра начинается здесь:
-
-screen monastry_map:
-    imagemap:
-        ground "images/map_ground.jpg"
-        hover "images/map_hover.jpg"
-        # hotspot (353,140,157,56) action Jump ("start") # Гостевой дом
-        # hotspot (685,76,270,52) action Jump ("start") # Дом преподавателей
-        hotspot (594,220,162,53) action Jump ("barracs_loc") # Спальни
-        hotspot (323,326,116,51) action Jump ("classes_loc") # Классы
-        # hotspot (394,526,139,53) action Jump ("start") # Трапезная
-        # hotspot (352,703,102,52) action Jump ("start") # Кухня
-        # hotspot (552,757,115,52) action Jump ("start") # Склад
-        hotspot (723,646,114,42) action Jump ("library_loc") # Библиотека
-        hotspot (838,659,161,47) action Jump ("chapel_loc") # Часовня
-        hotspot (323,914,302,51) action Jump ("main_gates_loc") # Подсобное хозяйство
-        hotspot (1263,768,154,51) action Jump ("hopital_loc") # Больница
-        # hotspot (1028,113,105,54) action Jump ("start") # Храм
-        # hotspot (1067,209,124,56) action Jump ("start") # Конюшни
-        # hotspot (1212,201,159,52) action Jump ("start") # Мемориал
-        hotspot (1491,105,104,50) action Jump ("main_gates_loc") # Мельница
-        # hotspot (1357,337,235,55) action Jump ("start") # Дом ректора
-
-screen show_png(path):
-    add path       
-       
-screen hud_screen:
-    zorder 100
-    frame:
-        background None
-        right_padding 8
-        top_padding 8
-        xpos 1.0
-        xanchor 1.0
-        vbox:
-            hbox:
-                imagebutton:
-                    xoffset 7
-                    yoffset -7
-                    idle "icons/map_icon2_idle.png"
-                    hover "icons/map_icon2_hover.png"
-                    action [
-                        Return(["monastry_map_loc"])
-                    ]
-
-label book_pre_reading_loc(book_name, callback_loc):
-
-    $ BookNameLocal = book_name # store context
-    $ CallBackLocal = callback_loc
-    
-    call book_reading_loc(BookNameLocal, CallBackLocal)
-
-label book_reading_loc(book_name, callback_loc):
-    
-    call screen book_reading(book_name, callback_loc, LocalBookPagePointer)
-    
-    screen book_reading(book_name, callback_loc, cur_page):
-        modal True
-        add (book_name + str(cur_page) + ".png")
-        imagebutton:
-            auto "books/exit_%s.png"
-            focus_mask True
-            action Jump ("page_close")
-        if LocalBookPagePointer > 1:
-            imagebutton:
-                auto "books/left_arrow_%s.png" 
-                focus_mask True
-                action Jump ("page_left")
-        if LocalBookPagePointer < GetBookLen(book_name):
-            imagebutton:
-                auto "books/right_arrow_%s.png"
-                focus_mask True
-                action Jump ("page_right")
-                
+              
 
 label page_left:
 
     $ LocalBookPagePointer -= 1
     
-    call book_reading_loc(BookNameLocal, CallBackLocal)
+    call book_reading_loc(BookNameLocal, CallBackLocal) from _call_book_reading_loc_1
     
 label page_right:
 
     $ LocalBookPagePointer += 1
     
-    call book_reading_loc(BookNameLocal, CallBackLocal)
+    call book_reading_loc(BookNameLocal, CallBackLocal) from _call_book_reading_loc_2
     
 label page_close:
 
@@ -127,6 +72,9 @@ label page_close:
         renpy.jump(CallBackLocal)
     
 label start:
+
+    if DEBUG==True:
+        call diary_main_loc
 
     show castle_far_away
 
@@ -147,10 +95,6 @@ label classes_loc:
             "Приятная тиниша и прохлада класса накрыли Рэндала"
             $ ClassesFirstVisit = 1
         
-        # call screen hud_screen
-        
-        # show classes
-        
         call screen monk_talk
 
         screen monk_talk():
@@ -158,9 +102,10 @@ label classes_loc:
             add "classes"
             modal True
             
-            imagebutton auto "classes_%s.png" focus_mask True action Jump ("talk_to_monk")
-            
+            imagebutton auto "classes_%s.png" focus_mask True action Jump ("talk_to_monk")            
             imagebutton auto "classes_door_%s.png" focus_mask True action Jump ("monastry_map_loc")
+            imagebutton auto "classes/table_%s.png" focus_mask True action Jump ("classes_study_loc")
+            imagebutton auto "classes/hexenhammer_%s.png" focus_mask True action Call ("book_pre_reading_loc","classes/hexenhammer_","classes_loc")
             
         return
         
@@ -173,7 +118,9 @@ label talk_to_monk:
     menu:
         "Вы готовы к сдаче зачета?"
         
-        "Да":
+        "Да" if RandalDevilLangKnow >= 10:
+            call quest_complete_label("Сдать зачет по дьявольскому")
+            call time_forward_h(1)
             jump monastry_map_loc
             
         "Нет":
@@ -202,6 +149,7 @@ label barracs_loc:
         imagebutton auto "barracs_bg_elv_%s.png" focus_mask True action Jump ("elv_talk_loc")
         
         imagebutton auto "barracs/barracs_book_%s.png" focus_mask True action Call ("book_pre_reading_loc","books/barracs_iomedae_","barracs_loc")
+        imagebutton auto "barracs/randal_bed_%s.png" focus_mask True action Jump ("barracs_sleep_loc")
         
     return
 
@@ -377,7 +325,7 @@ label beaten_loc:
     
     "Успокоился, урод? Тащите его в лазарет, пусть заштопают"
     
-    call hopital_loc(True)
+    call hopital_loc(True) from _call_hopital_loc
 
     return
     
@@ -463,29 +411,37 @@ label chapel_monk_talk:
                 ulm "*Мрачно* Ага"
                 hide chapel_monk
                 jump chapel_loc
-            "Тебе может помочь чем?":
+                # TODO here we need quest exist check function
+            "Тебе может помочь чем?" if "Найти Ульму пожрать" not in QuestListPassed and "Найти Ульму пожрать" not in QuestListActive:
                 r "Тебе может помочь чем?"
                 ulm "Пожрать бы чего-нибудь"
                 r "Придумаю чего-нибудь"
                 ulm "Спасибо, Рэндал"
                 r "Бывай"
+                $ QuestListActive.append("Найти Ульму пожрать")
                 hide chapel_monk
                 jump chapel_loc
-                
+            "Я тут тебе пожрать притаранил" if "Найти Ульму пожрать" in QuestListActive and "Колбаса с кухни" in InventoryList:
+                ulm "Спасибо, Рэндал!"
+                r "Да незачто, бывай"
+                $ QuestListPassed.append("Найти Ульму пожрать")
+                $ QuestListActive.remove("Найти Ульму пожрать")
+                $ InventoryList.remove("Колбаса с кухни")
+                jump chapel_loc
     return
                 
 label chapel_statue_loc:
     
     scene chapel_statue_bg
 
-    if IomedaeOldFirstVisit == 0:
+    if IomedaeOldFirstVisit == 0 and IomedaeStatueInfoFirstVisit == 1:
         $ IomedaeOldFirstVisit = 1
         r "Ничего себе богиня. Хороша. Такой можно и послужить *Усмехнулся*"
         r "*Лицо стало серьёзней* Спасибо тебе, что приютила, прекрасная воительница."
         
     menu:
     
-        "Помолиться":
+        "Помолиться" if IomedaeStatueInfoFirstVisit == 1:
             r "Солнце, купи мне гитару"
             r "Научи курить план"
             r "Не раскачивай Землю,"
@@ -493,10 +449,94 @@ label chapel_statue_loc:
             r "Пивом проставь, да прокляни сушняк"
             r "Вобщем, сделай так чтобы всё было ништяк"
             jump chapel_loc
-        "Просто полюбоваться прелестями богини":   
+        "Просто полюбоваться прелестями богини" if IomedaeStatueInfoFirstVisit == 1:   
             $ renpy.pause(5)
             jump chapel_loc
-        "В следующий раз":
+        "Полюбоваться прелестями статуи" if IomedaeStatueInfoFirstVisit == 0:   
+            $ renpy.pause(5)
+            jump chapel_loc
+        "В следующий раз" :
             jump chapel_loc
 
     return
+    
+label kitchen_loc:
+
+    scene kitchen_bg_cook
+    
+    if KitchenFirstVisit == 0:
+        $ KitchenFirstVisit = 1
+        r " *Принюхивается* Аж слюнки потекли..."
+
+    call screen kitchen_nav
+        
+    screen kitchen_nav:    
+        modal True
+        imagebutton auto "kitchen/kitchen_basket_%s.png" focus_mask True action Jump ("kitchen_steal_food_loc")
+        imagebutton auto "kitchen/cook_%s.png" focus_mask True action Jump ("kitchen_cook_talk_loc")
+        imagebutton auto "kitchen/exit_%s.png" focus_mask True action Jump ("monastry_map_loc")
+        
+label kitchen_steal_food_loc:
+
+    scene kitchen_bg_cook
+    
+    menu :
+        "Кажется я могу незаметно свистнуть колбасу..."
+        
+        "Ну нафиг":
+            jump kitchen_loc
+            
+        "Было ваше стало наше" if "Колбаса с кухни" not in InventoryList:
+            $ InventoryList.append("Колбаса с кухни")
+            jump kitchen_loc
+            
+label kitchen_cook_talk_loc:
+
+    scene kitchen_bg_no_cook
+    
+    show cook
+    
+    cook "Чего надо?"
+    
+    menu:
+    
+        "Можно у вас чего-нибудь попросить поесть?":
+            cook "*Раздраженно* Вали отсюда. Есть будешь со всеми. Если заслужишь"
+            jump kitchen_loc
+            
+        "Там в часовне послушник Ульм на дежурсве с голоду пухнет. Можно для него паек получить?":
+            cook "*Раздраженно* Ты кого надурить вздумал? Вали отсюда, проходимец!"
+            jump kitchen_loc
+
+label classes_study_loc:
+
+    menu:
+    
+        "Ботать дьявольский" if RandalDevilLangKnow < 10:
+            call time_forward_h(8)
+            $ RandalDevilLangKnow += 1
+            with fade
+            jump classes_loc
+        "Да ну его нафиг, заебался в корень":
+            jump classes_loc
+    
+    
+label barracs_sleep_loc:
+
+    menu:
+    
+        "Спать до утра":
+            call time_forward_h(8 + (24 - TimeCounter))
+            scene randal_sleep with fade
+            $ renpy.pause(1)
+            jump barracs_loc
+        "Спать 1 час":
+            call time_forward_h(1)
+            scene randal_sleep with fade
+            $ renpy.pause(1)
+            jump barracs_loc
+        "Спать 8 часов":
+            call time_forward_h(8)
+            scene randal_sleep with fade
+            $ renpy.pause(1)
+            jump barracs_loc

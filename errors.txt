@@ -2,9 +2,9 @@
 errors listed below, and try again.
 
 
-File "game/add.rpy", line 68: expected 'label_name' not found.
-    jump(NextLocation)
-        ^
+File "game/add.rpy", line 314: keyword argument u'xanchor' appears more than once in a vbox statement.
+    xanchor -200
+           ^
 
 Ren'Py Version: Ren'Py 7.4.8.1895
-Fri Oct  8 03:48:14 2021
+Fri Oct 15 00:07:52 2021

@@ -1,39 +1,6 @@
 # Служебные функции
 
 init python:
-    # TO DO add descriptions from JSON & create data structures for locationinfo, questinfo etc.
-    
-    def GetItemDescrText (ItemName):
-    
-        if ItemName == "alch_fire" : 
-            return AlchFireItemDescrText
-        elif ItemName == "clothes_ofic" : 
-            return ClothesOficItemDescrText
-        elif ItemName == "dagger" : 
-            return DaggerItemDescrText
-        elif ItemName == "flask" : 
-            return FlaskItemDescrText
-        elif ItemName == "harrow_deck" : 
-            return HarrowDeckDescrText
-        elif ItemName == "heal" : 
-            return HealItemDescrText
-        elif ItemName == "key_randal" : 
-            return KeyRandalItemDescrText
-        elif ItemName == "kolbasa" : 
-            return KolbasaItemDescrText
-        elif ItemName == "lamp" : 
-            return LampItemDescrText
-        elif ItemName == "monk_robe" : 
-            return MonkRobeItemDescrText
-        elif ItemName == "pouch" : 
-            return PouchItemDescrText
-        elif ItemName == "rum_bottle" : 
-            return RumBottleItemDescrText
-        elif ItemName == "water" : 
-            return WaterItemDescrText
-        else : 
-            return "Хуй его еби что это такое."
-
     def GetBookLen (book_name):
         if book_name == "books/barracs_iomedae_":
             return 3
@@ -52,11 +19,7 @@ init python:
         else:
             return "Эээм... хз че тут делать надо"
         
-    def GetInvHLineNum(ItemsArray):
-        if len(ItemsArray) // InventoryHSizeItems > 0:
-            return len(ItemsArray) // InventoryHSizeItems + 1
-        else:
-            return len(ItemsArray) // InventoryHSizeItems
+            
     
 label time_forward_h(delay):
     
@@ -86,7 +49,7 @@ label night_patrol_catch:
     
     ngrd "Ты чего тут бродишь?! А ну марш в казарму, щенок!"
     
-    call set_time_h(8) from _call_set_time_h
+    call set_time_h(8)
     
     jump barracs_loc
     
@@ -98,9 +61,9 @@ label set_time_h (time):
 
 label interloc_time_advance(NextLocation):
 
-    call time_forward_h(1) from _call_time_forward_h
+    call time_forward_h(1)
     
-    call night_patrol_check from _call_night_patrol_check
+    call night_patrol_check
     
     $ renpy.jump(NextLocation)
 
@@ -194,28 +157,6 @@ label book_reading_loc(book_name, callback_loc):
                 focus_mask True
                 action Jump ("page_right")
 
-label page_left:
-    play sound "audio/page_flip.wav" volume 1.0
-
-    $ LocalBookPagePointer -= 1
-    
-    call book_reading_loc(BookNameLocal, CallBackLocal) from _call_book_reading_loc_1
-    
-label page_right:
-    play sound "audio/page_flip.wav" volume 1.0
-
-    $ LocalBookPagePointer += 1
-    
-    call book_reading_loc(BookNameLocal, CallBackLocal) from _call_book_reading_loc_2
-    
-label page_close:
-
-    play sound "audio/book_close.wav" volume 1.0
-
-    $ LocalBookPagePointer = 1
-    python:
-        renpy.jump(CallBackLocal)
-
 style diary_button_text:
     color "#000000"
     hover_color "#FF0000"
@@ -223,7 +164,6 @@ style diary_button_text:
     font "AmadeusAP.ttf"
    
 style diary_detailed_text:
-    size 30
     font "AmadeusAP.ttf"  
 
 label quest_complete_label(closed_quest_name):
@@ -292,66 +232,4 @@ label quest_descr_label(QuestName):
         imagebutton:
             auto "books/exit_%s.png"
             focus_mask True
-            action Jump ("monastry_map_loc")
-
-label pic_inventory_label:
-    scene paper_bg
-    
-    call screen show_inventory_icons
-    
-    screen show_inventory_icons:
-        
-        vbox:
-            xanchor -200
-            yanchor -50
-            
-            for y in range(InventoryHSizeItems):
-                hbox:
-                    for x in range(InventoryHSizeItems):
-                        add 'icons/item_frame.png'
-        vbox:
-            xanchor -200
-            yanchor -50
-            $ VBuf = GetInvHLineNum(InventoryListTmp)            
-            for y in range(VBuf):
-                hbox:
-                    if y < VBuf - 1:
-                        for x in range(InventoryHSizeItems):
-                            imagebutton:
-                                auto 'icons/' + InventoryListTmp[y*InventoryHSizeItems + x] + '_icon_%s.png'
-                                focus_mask True
-                                action Call ("inventory_item_deteiled", InventoryListTmp[y*InventoryHSizeItems + x])
-                    elif y == VBuf - 1:
-                        for x in range(len(InventoryListTmp) % InventoryHSizeItems):
-                            imagebutton:
-                                auto 'icons/' + InventoryListTmp[y*InventoryHSizeItems + x] + '_icon_%s.png'
-                                focus_mask True
-                                action Call ("inventory_item_deteiled", InventoryListTmp[y*InventoryHSizeItems + x])
-                
-        imagebutton:
-            auto "books/exit_%s.png"
-            focus_mask True
-            action Jump ("monastry_map_loc")
-            
-            
-label inventory_item_deteiled(ItemKey):
-
-    scene paper_bg
-    
-    call screen show_inventory_detailed_stats
-    
-    screen show_inventory_detailed_stats:
-    
-        add 'items/' + ItemKey + '.png' xpos 1000 zoom 0.75
-        
-        text GetItemDescrText(ItemKey) color "000000" area (265, 122, 625, 752) italic True style "diary_detailed_text"
-        
-        imagebutton:
-            auto "books/exit_%s.png"
-            focus_mask True
-            action Jump ("monastry_map_loc")
-            
-        imagebutton:
-            auto "books/left_arrow_%s.png" 
-            focus_mask True
-            action Jump ("pic_inventory_label")
+            action Jump ("monastry_map_loc")            

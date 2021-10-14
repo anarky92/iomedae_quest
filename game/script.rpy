@@ -10,7 +10,7 @@ define heal = Character('Мастер медицины', color="#c3f243")
 define ulm = Character('Ульм', color="#d3be53")
 define ngrd = Character('Ночной стражник', color="#530bd3")
 define cook = Character('Повар', color="#e95502")
-define DEBUG = False
+define DEBUG = True
 
 # Настройки по умолчанию
 
@@ -48,33 +48,31 @@ default RandalStatus = "Испытательный срок"
 default QuestListActive = ["Сдать зачет по дьявольскому", "Принести кастеляну масло"]
 default QuestListPassed = []
 default InventoryList = []
+default InventoryListTmp = ['alch_fire', 
+                            'clothes_ofic', 
+                            'dagger', 
+                            'flask', 
+                            'harrow_deck',
+                            'heal',
+                            'key_randal',
+                            'kolbasa',
+                            'lamp',
+                            'monk_robe',
+                            'pouch',
+                            'rum_bottle',
+                            'water']
+
+# UI settings
+default InventoryHSizeItems = 8
 
 
 # Игра начинается здесь:
-              
-
-label page_left:
-
-    $ LocalBookPagePointer -= 1
-    
-    call book_reading_loc(BookNameLocal, CallBackLocal) from _call_book_reading_loc_1
-    
-label page_right:
-
-    $ LocalBookPagePointer += 1
-    
-    call book_reading_loc(BookNameLocal, CallBackLocal) from _call_book_reading_loc_2
-    
-label page_close:
-
-    $ LocalBookPagePointer = 1
-    python:
-        renpy.jump(CallBackLocal)
-    
+                  
 label start:
 
     if DEBUG==True:
-        call diary_main_loc
+        call pic_inventory_label
+        # call diary_main_loc from _call_diary_main_loc
 
     show castle_far_away
 
@@ -119,8 +117,8 @@ label talk_to_monk:
         "Вы готовы к сдаче зачета?"
         
         "Да" if RandalDevilLangKnow >= 10:
-            call quest_complete_label("Сдать зачет по дьявольскому")
-            call time_forward_h(1)
+            call quest_complete_label("Сдать зачет по дьявольскому") from _call_quest_complete_label
+            call time_forward_h(1) from _call_time_forward_h_1
             jump monastry_map_loc
             
         "Нет":
@@ -513,7 +511,7 @@ label classes_study_loc:
     menu:
     
         "Ботать дьявольский" if RandalDevilLangKnow < 10:
-            call time_forward_h(8)
+            call time_forward_h(8) from _call_time_forward_h_2
             $ RandalDevilLangKnow += 1
             with fade
             jump classes_loc
@@ -526,17 +524,17 @@ label barracs_sleep_loc:
     menu:
     
         "Спать до утра":
-            call time_forward_h(8 + (24 - TimeCounter))
+            call time_forward_h(8 + (24 - TimeCounter)) from _call_time_forward_h_3
             scene randal_sleep with fade
             $ renpy.pause(1)
             jump barracs_loc
         "Спать 1 час":
-            call time_forward_h(1)
+            call time_forward_h(1) from _call_time_forward_h_4
             scene randal_sleep with fade
             $ renpy.pause(1)
             jump barracs_loc
         "Спать 8 часов":
-            call time_forward_h(8)
+            call time_forward_h(8) from _call_time_forward_h_5
             scene randal_sleep with fade
             $ renpy.pause(1)
             jump barracs_loc
