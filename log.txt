@@ -1,4 +1,4 @@
-Fri Oct 15 01:57:47 2021
+Fri Oct 15 02:06:16 2021
 Windows-10-10.0.19041
 Ren'Py 7.4.8.1895
  
@@ -7,19 +7,19 @@ Bootstrap to the start of init.init took 0.09s
 Early init took 0.00s
 Loader init took 0.03s
 Loading error handling took 0.02s
-Loading script took 0.27s
+Loading script took 0.30s
 Loading save slot metadata. took 0.02s
 Loading persistent took 0.00s
 Importing _renpysteam: ImportError('No module named _renpysteam',)
 Running init code took 0.07s
-Loading analysis data took 0.04s
+Loading analysis data took 0.02s
 Analyze and compile ATL took 0.00s
 Index archives took 0.00s
 Backing up script files to 'C:\\Users\\Anarky\\AppData\\Roaming/RenPy/backups\\randal':
 Dump and make backups. took 0.07s
 Cleaning cache took 0.00s
 Making clean stores took 0.00s
-Initial gc. took 0.03s
+Initial gc. took 0.02s
 DPI scale factor: 1.000000
 nvdrs: Loaded, about to disable thread optimizations.
 nvdrs: Disabled thread optimizations.
@@ -30,8 +30,8 @@ Build styles took 0.00s
 Load screen analysis took 0.00s
 Analyze screens took 0.02s
 Save screen analysis took 0.09s
-Prepare screens took 0.07s
-Save pyanalysis. took 0.00s
+Prepare screens took 0.08s
+Save pyanalysis. took 0.09s
 Save bytecode. took 0.03s
 Running _start took 0.00s
 Performance test:
@@ -45,7 +45,5 @@ Vendor: 'NVIDIA Corporation'
 Renderer: 'NVIDIA GeForce GTX 1070/PCIe/SSE2'
 Version: '4.6.0 NVIDIA 471.11'
 Display Info: None
-Screen sizes: virtual=(1920, 1080) physical=(2377, 1337) drawable=(2377, 1337)
-Maximum texture size: 4096x4096
-Screen sizes: virtual=(1920, 1080) physical=(2560, 1417) drawable=(2560, 1417)
+Screen sizes: virtual=(1920, 1080) physical=(2379, 1338) drawable=(2379, 1338)
 Maximum texture size: 4096x4096

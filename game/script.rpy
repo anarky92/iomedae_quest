@@ -49,21 +49,6 @@ default RandalStatus = "Испытательный срок"
 
 default QuestListActive = ["Сдать зачет по дьявольскому", "Принести кастеляну масло"]
 default QuestListPassed = []
-default InventoryList = []
-default InventoryListTmp = ['alch_fire', 
-                            'clothes_ofic', 
-                            'dagger', 
-                            'flask', 
-                            'harrow_deck',
-                            'heal',
-                            'key_randal',
-                            'kolbasa',
-                            'lamp',
-                            'monk_robe',
-                            'pouch',
-                            'rum_bottle',
-                            'water']
-                            
                            
 # UI settings
 default InventoryHSizeItems = 8
@@ -427,7 +412,6 @@ label chapel_monk_talk:
                 r "Да незачто, бывай"
                 $ QuestListPassed.append("Найти Ульму пожрать")
                 $ QuestListActive.remove("Найти Ульму пожрать")
-                # $ InventoryList.remove("Колбаса с кухни")
                 call inventory_item_del("kolbasa")
                 jump chapel_loc
     return
@@ -489,7 +473,6 @@ label kitchen_steal_food_loc:
             jump kitchen_loc
             
         "Было ваше стало наше" if "kolbasa" not in InventoryItemDict:
-            # $ InventoryList.append("Колбаса с кухни")
             call inventory_item_add("kolbasa")
             jump kitchen_loc
             
