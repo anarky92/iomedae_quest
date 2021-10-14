@@ -43,6 +43,8 @@ default RandalHistoryKnow = 0
 default RandalGood = 50 # Neutral
 default RandalLawful = 85 # Lawful
 
+
+default RandalGoldAmnt = 10
 default RandalStatus = "Испытательный срок"
 
 default QuestListActive = ["Сдать зачет по дьявольскому", "Принести кастеляну масло"]
@@ -61,7 +63,8 @@ default InventoryListTmp = ['alch_fire',
                             'pouch',
                             'rum_bottle',
                             'water']
-
+                            
+                           
 # UI settings
 default InventoryHSizeItems = 8
 
@@ -419,12 +422,13 @@ label chapel_monk_talk:
                 $ QuestListActive.append("Найти Ульму пожрать")
                 hide chapel_monk
                 jump chapel_loc
-            "Я тут тебе пожрать притаранил" if "Найти Ульму пожрать" in QuestListActive and "Колбаса с кухни" in InventoryList:
+            "Я тут тебе пожрать притаранил" if "Найти Ульму пожрать" in QuestListActive and "kolbasa" in InventoryItemDict:
                 ulm "Спасибо, Рэндал!"
                 r "Да незачто, бывай"
                 $ QuestListPassed.append("Найти Ульму пожрать")
                 $ QuestListActive.remove("Найти Ульму пожрать")
-                $ InventoryList.remove("Колбаса с кухни")
+                # $ InventoryList.remove("Колбаса с кухни")
+                call inventory_item_del("kolbasa")
                 jump chapel_loc
     return
                 
@@ -484,8 +488,9 @@ label kitchen_steal_food_loc:
         "Ну нафиг":
             jump kitchen_loc
             
-        "Было ваше стало наше" if "Колбаса с кухни" not in InventoryList:
-            $ InventoryList.append("Колбаса с кухни")
+        "Было ваше стало наше" if "kolbasa" not in InventoryItemDict:
+            # $ InventoryList.append("Колбаса с кухни")
+            call inventory_item_add("kolbasa")
             jump kitchen_loc
             
 label kitchen_cook_talk_loc:

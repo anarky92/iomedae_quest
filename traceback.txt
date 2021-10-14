@@ -1,78 +1,34 @@
 ﻿I'm sorry, but an uncaught exception occurred.
 
 While running game code:
-  File "game/script.rpy", line 74, in script call
-    call pic_inventory_label
-  File "game/add.rpy", line 286, in script call
-    call screen show_inventory_icons
-  File "game/add.rpy", line 322, in script
-    call screen show_inventory_detailed_stats
-  File "renpy/common/000statements.rpy", line 569, in execute_call_screen
-    store._return = renpy.call_screen(name, *args, **kwargs)
-  File "game/add.rpy", line 324, in execute
-    screen show_inventory_detailed_stats:
-  File "game/add.rpy", line 324, in execute
-    screen show_inventory_detailed_stats:
-  File "game/add.rpy", line 328, in execute
-    text GetItemDescrText(ItemKey) color "000000" area (265, 122, 625, 752) italic True style "diary_detailed_text"
-  File "game/add.rpy", line 328, in <module>
-    text GetItemDescrText(ItemKey) color "000000" area (265, 122, 625, 752) italic True style "diary_detailed_text"
-  File "game/add.rpy", line 21, in GetItemDescrText
-    }["Хуй его еби что это такое."]
-KeyError: u'\u0425\u0443\u0439 \u0435\u0433\u043e \u0435\u0431\u0438 \u0447\u0442\u043e \u044d\u0442\u043e \u0442\u0430\u043a\u043e\u0435.'
+  File "game/add.rpy", line 3, in script
+    init python:
+  File "game/add.rpy", line 3, in script
+    init python:
+  File "game/add.rpy", line 42, in <module>
+    InventoryItemDict ['alch_fire'] = GetItemDescrText('alch_fire')
+NameError: name 'GetItemDescrText' is not defined
 
 -- Full Traceback ------------------------------------------------------------
 
 Full traceback:
-  File "game/script.rpy", line 74, in script call
-    call pic_inventory_label
-  File "game/add.rpy", line 286, in script call
-    call screen show_inventory_icons
-  File "game/add.rpy", line 322, in script
-    call screen show_inventory_detailed_stats
-  File "renpy/ast.py", line 2010, in execute
-    self.call("execute")
-  File "renpy/ast.py", line 1998, in call
-    return renpy.statements.call(method, parsed, *args, **kwargs)
-  File "renpy/statements.py", line 278, in call
-    return method(parsed, *args, **kwargs)
-  File "renpy/common/000statements.rpy", line 569, in execute_call_screen
-    store._return = renpy.call_screen(name, *args, **kwargs)
-  File "renpy/exports.py", line 3132, in call_screen
-    rv = renpy.ui.interact(mouse="screen", type="screen", roll_forward=roll_forward)
-  File "renpy/ui.py", line 298, in interact
-    rv = renpy.game.interface.interact(roll_forward=roll_forward, **kwargs)
-  File "renpy/display/core.py", line 3276, in interact
-    repeat, rv = self.interact_core(preloads=preloads, trans_pause=trans_pause, pause=pause, pause_start=pause_start, **kwargs)
-  File "renpy/display/core.py", line 3694, in interact_core
-    root_widget.visit_all(lambda i : i.per_interact())
-  File "renpy/display/core.py", line 568, in visit_all
-    d.visit_all(callback, seen)
-  File "renpy/display/core.py", line 568, in visit_all
-    d.visit_all(callback, seen)
-  File "renpy/display/core.py", line 568, in visit_all
-    d.visit_all(callback, seen)
-  File "renpy/display/screen.py", line 432, in visit_all
-    callback(self)
-  File "renpy/display/core.py", line 3694, in <lambda>
-    root_widget.visit_all(lambda i : i.per_interact())
-  File "renpy/display/screen.py", line 443, in per_interact
-    self.update()
-  File "renpy/display/screen.py", line 631, in update
-    self.screen.function(**self.scope)
-  File "game/add.rpy", line 324, in execute
-    screen show_inventory_detailed_stats:
-  File "game/add.rpy", line 324, in execute
-    screen show_inventory_detailed_stats:
-  File "game/add.rpy", line 328, in execute
-    text GetItemDescrText(ItemKey) color "000000" area (265, 122, 625, 752) italic True style "diary_detailed_text"
-  File "game/add.rpy", line 328, in <module>
-    text GetItemDescrText(ItemKey) color "000000" area (265, 122, 625, 752) italic True style "diary_detailed_text"
-  File "game/add.rpy", line 21, in GetItemDescrText
-    }["Хуй его еби что это такое."]
-KeyError: u'\u0425\u0443\u0439 \u0435\u0433\u043e \u0435\u0431\u0438 \u0447\u0442\u043e \u044d\u0442\u043e \u0442\u0430\u043a\u043e\u0435.'
+  File "renpy/bootstrap.py", line 326, in bootstrap
+    renpy.main.main()
+  File "renpy/main.py", line 515, in main
+    renpy.game.context().run(node)
+  File "game/add.rpy", line 3, in script
+    init python:
+  File "game/add.rpy", line 3, in script
+    init python:
+  File "renpy/ast.py", line 923, in execute
+    renpy.python.py_exec_bytecode(self.code.bytecode, self.hide, store=self.store)
+  File "renpy/python.py", line 2235, in py_exec_bytecode
+    exec(bytecode, globals, locals)
+  File "game/add.rpy", line 42, in <module>
+    InventoryItemDict ['alch_fire'] = GetItemDescrText('alch_fire')
+NameError: name 'GetItemDescrText' is not defined
 
 Windows-10-10.0.19041
 Ren'Py 7.4.8.1895
 randal_may_monastry 1.0
-Thu Oct 14 23:47:38 2021
+Fri Oct 15 01:32:16 2021

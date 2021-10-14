@@ -3,6 +3,34 @@
 init python:
     # TO DO add descriptions from JSON & create data structures for locationinfo, questinfo etc.
     
+    # InventoryItemDict = {   'alch_fire' : AlchFireItemDescrText, 
+                            # 'clothes_ofic' : ClothesOficItemDescrText, 
+                            # 'dagger' : DaggerItemDescrText, 
+                            # 'flask' : FlaskItemDescrText, 
+                            # 'harrow_deck' : HarrowDeckDescrText,
+                            # 'heal' : HealItemDescrText,
+                            # 'key_randal' : KeyRandalItemDescrText,
+                            # 'lamp' : LampItemDescrText,
+                            # 'monk_robe' : MonkRobeItemDescrText,
+                            # 'pouch' : PouchItemDescrText,
+                            # 'rum_bottle' : RumBottleItemDescrText,
+                            # 'water' : WaterItemDescrText}
+                            
+                            
+    # Something strange here                        
+    InventoryItemDict = {   'alch_fire' : "blabla", 
+                        'clothes_ofic' : "blabla", 
+                        'dagger' : "blabla", 
+                        'flask' : "blabla", 
+                        'harrow_deck' : "blabla",
+                        'heal' : "blabla",
+                        'key_randal' : "blabla",
+                        'lamp' : "blabla",
+                        'monk_robe' : "blabla",
+                        'pouch' : "blabla",
+                        'rum_bottle' : "blabla",
+                        'water' : "blabla"}
+        
     def GetItemDescrText (ItemName):
     
         if ItemName == "alch_fire" : 
@@ -223,7 +251,7 @@ style diary_button_text:
     font "AmadeusAP.ttf"
    
 style diary_detailed_text:
-    size 30
+    size 40
     font "AmadeusAP.ttf"  
 
 label quest_complete_label(closed_quest_name):
@@ -251,7 +279,7 @@ label diary_main_loc:
         imagebutton:
             auto "books/bag_%s.png"
             focus_mask True
-            action Jump ("inventory_show")            
+            action Jump ("pic_inventory_label")            
             
 label inventory_show:
 
@@ -300,6 +328,13 @@ label pic_inventory_label:
     call screen show_inventory_icons
     
     screen show_inventory_icons:
+
+        vbox:
+            xanchor -1300
+            yanchor -250
+            
+            add 'icons/gold.png' zoom .5
+            text "     " + str(RandalGoldAmnt) + " золотых" color "#000000" font "AmadeusAP.ttf" size 60
         
         vbox:
             xanchor -200
@@ -312,21 +347,22 @@ label pic_inventory_label:
         vbox:
             xanchor -200
             yanchor -50
-            $ VBuf = GetInvHLineNum(InventoryListTmp)            
+            $ VBuf = GetInvHLineNum(InventoryItemDict) 
+            $ ItemsListBuf = InventoryItemDict.keys()
             for y in range(VBuf):
                 hbox:
                     if y < VBuf - 1:
                         for x in range(InventoryHSizeItems):
                             imagebutton:
-                                auto 'icons/' + InventoryListTmp[y*InventoryHSizeItems + x] + '_icon_%s.png'
+                                auto 'icons/' + ItemsListBuf[y*InventoryHSizeItems + x] + '_icon_%s.png'
                                 focus_mask True
-                                action Call ("inventory_item_deteiled", InventoryListTmp[y*InventoryHSizeItems + x])
+                                action Call ("inventory_item_deteiled", ItemsListBuf[y*InventoryHSizeItems + x])
                     elif y == VBuf - 1:
-                        for x in range(len(InventoryListTmp) % InventoryHSizeItems):
+                        for x in range(len(ItemsListBuf) % InventoryHSizeItems):
                             imagebutton:
-                                auto 'icons/' + InventoryListTmp[y*InventoryHSizeItems + x] + '_icon_%s.png'
+                                auto 'icons/' + ItemsListBuf[y*InventoryHSizeItems + x] + '_icon_%s.png'
                                 focus_mask True
-                                action Call ("inventory_item_deteiled", InventoryListTmp[y*InventoryHSizeItems + x])
+                                action Call ("inventory_item_deteiled", ItemsListBuf[y*InventoryHSizeItems + x])
                 
         imagebutton:
             auto "books/exit_%s.png"
@@ -344,6 +380,7 @@ label inventory_item_deteiled(ItemKey):
     
         add 'items/' + ItemKey + '.png' xpos 1000 zoom 0.75
         
+        # text InventoryItemDict.get(ItemKey) color "000000" area (265, 122, 625, 752) italic True style "diary_detailed_text"
         text GetItemDescrText(ItemKey) color "000000" area (265, 122, 625, 752) italic True style "diary_detailed_text"
         
         imagebutton:
@@ -355,3 +392,15 @@ label inventory_item_deteiled(ItemKey):
             auto "books/left_arrow_%s.png" 
             focus_mask True
             action Jump ("pic_inventory_label")
+            
+label inventory_item_add(AddItemKey):
+    
+    $ InventoryItemDict [str(AddItemKey)] = GetItemDescrText(AddItemKey)
+    
+    return
+    
+label inventory_item_del(RmItemKey):
+    
+    $ del InventoryItemDict[str(RmItemKey)] 
+    
+    return
