@@ -1,6 +1,6 @@
 ﻿# Определение персонажей игры:
 
-define r = Character('Рэндал', color="#c8ffc8")
+define r = Character("Рэндал", color="#c8ffc8")
 define e = Character('Амариэ', color="#c800c8")
 define l = Character('Мастер Сеймур', color="#0088c8")
 define i = Character('Иган', color="#AA00FF")
@@ -10,6 +10,7 @@ define heal = Character('Мастер медицины', color="#c3f243")
 define ulm = Character('Ульм', color="#d3be53")
 define ngrd = Character('Ночной стражник', color="#530bd3")
 define cook = Character('Повар', color="#e95502")
+#define castellan = Character(castellannpc.name, color="#c80f08")
 define DEBUG = True
 
 # Настройки по умолчанию
@@ -58,9 +59,178 @@ default InventoryHSizeItems = 8
                   
 label start:
 
+    python:
+
+        InventoryItemDict = {   'alch_fire' : AlchFireItemDescrText,
+                                'clothes_ofic' : ClothesOficItemDescrText,
+                                'dagger' : DaggerItemDescrText,
+                                'flask' : FlaskItemDescrText,
+                                'harrow_deck' : HarrowDeckDescrText,
+                                'heal' : HealItemDescrText,
+                                'key_randal' : KeyRandalItemDescrText,
+                                'lamp' : LampItemDescrText,
+                                'monk_robe' : MonkRobeItemDescrText,
+                                'pouch' : PouchItemDescrText,
+                                'rum_bottle' : RumBottleItemDescrText,
+                                'water' : WaterItemDescrText}
+
+
+        # Something strange here
+        temDict = {   'alch_fire' : "blabla",
+                           'clothes_ofic' : "blabla",
+                           'dagger' : "blabla",
+                           'flask' : "blabla",
+                           'harrow_deck' : "blabla",
+                           'heal' : "blabla",
+                           'key_randal' : "blabla",
+                           'lamp' : "blabla",
+                           'monk_robe' : "blabla",
+                           'pouch' : "blabla",
+                           'rum_bottle' : "blabla",
+                           'water' : "blabla"}
+
+        castallanmonkeycreature = CreatureClass(
+            hp = 100,
+            magic = False,
+            material = True,
+            descr = "Кастелян монастыря  Йорген. Скупой, злопамятный, внимательный.",
+            name = "Йорген",
+            force = 10,
+            dexterity = 15,
+            charisma = 6,
+            intellect = 8,
+            abils = ["Ordinary weapon", "Heavy weapon"],
+            weight = 80,
+            size = "middle",
+            hands = 2,
+            legs = 2,
+            heads = 1,
+            tails = 0,
+            nat_armor = 5,
+            speed = 20,
+            age = 45,
+            alignment = [85, -10],
+            cheerfulness = 100,
+            satiety = 100,
+            alias = None,
+            pic = None
+        )
+
+        castellannpc = CharClass(
+            hp = 100,
+            magic = False,
+            material = True,
+            descr = "Кастелян монастыря  Йорген. Скупой, злопамятный, внимательный.",
+            name = "Йорген",
+            force = 10,
+            dexterity = 15,
+            charisma = 6,
+            intellect = 8,
+            abils = ["Ordinary weapon", "Heavy weapon"],
+            weight = 80,
+            size = "middle",
+            hands = 2,
+            legs = 2,
+            heads = 1,
+            tails = 0,
+            nat_armor = 5,
+            speed = 20,
+            age = 45,
+            alignment = [85, -10],
+            cheerfulness = 100,
+            satiety = 100,
+            inventory = [],
+            hat = None,
+            clothes = None,
+            armor = None,
+            left_hand_item = None,
+            right_hand_item = None,
+            religion = "Iomedae",
+            alias = None,
+            pic = "castellan"
+        )
+
+#         randal = CharClass(
+#             hp = 100,
+#             magic = False,
+#             material = True,
+#             descr = "Главный герой собственно. Хотя как вы видите эту надпись я хз.",
+#             name = "Рэндал Мэй",
+#             force = 9,
+#             dexterity = 11,
+#             charisma = 16,
+#             intellect = 16,
+#             abils = ["Ordinary weapon"],
+#             weight = 70,
+#             size = "middle",
+#             hands = 2,
+#             legs = 2,
+#             heads = 1,
+#             tails = 0,
+#             nat_armor = 4,
+#             speed = 20,
+#             age = 25,
+#             alignment = [0, -26],
+#             cheerfulness = 100,
+#             satiety = 100,
+#             inventory = [],
+#             hat = None,
+#             clothes = None,
+#             armor = None,
+#             left_hand_item = None,
+#             right_hand_item = None,
+#             religion = None,
+#             alias = None,
+#             pic = None
+#         )
+
+
+        GoldenCoin = CoinClass(
+            hp = 10,
+            cost = 100,
+            magic = False,
+            material = "gold",
+            owner = None,
+            descr = items_descr_dict["Golden coin"],
+            name = "Golden coin",
+            effect = 25,
+            effect_type = "Phys damage",
+            stat_req = [15, 6, 0, 0],
+            abil_req = ["Ordinary weapon", "Heavy weapon"],
+            solidity = 10,
+            fragile = False,
+            weight = 7,
+            hands_req = 2,
+            icon = "golden_coin_",
+            pic = "golden_coin"
+        )
+
+        CastellanGoldenBunch = ItemBunchClass(GoldenCoin, 100, "castellan_coins")
+
+#         StorageLocation = LocationClass(
+#             name = "storage",
+#             animals = None,
+#             npcs = [castellannpc],
+#             doors = ["storage_exit"],
+#             objects = [CastellanGoldenBunch],
+#             loc_description = "Склад! Надо будет найти способ наведаться сюда без свидетелей..."
+#         )
+
+        StorageLocation = LocationClass(
+            name = "storage",
+            animals = None,
+            npcs = None,
+            doors = ["storage_exit"],
+            objects = [CastellanGoldenBunch],
+            loc_description = "Склад! Надо будет найти способ наведаться сюда без свидетелей..."
+        )
+
     if DEBUG==True:
-        call pic_inventory_label
-        # call diary_main_loc from _call_diary_main_loc
+        $ location_object = StorageLocation
+        call location_abstract
+        #call pic_inventory_label
+        #call diary_main_loc from _call_diary_main_loc
+        #call diary_main_loc from _call_diary_main_loc
 
     show castle_far_away
 

@@ -1,0 +1,38 @@
+﻿I'm sorry, but an uncaught exception occurred.
+
+While running game code:
+  File "script.rpy", line 203, in script call
+    call location_abstract
+  File "add.rpy", line 640, in script
+    show coinimage
+Exception: DynamicImage u'[coinpic]': could not find image. (u'castellan_coins')
+
+-- Full Traceback ------------------------------------------------------------
+
+Full traceback:
+  File "script.rpy", line 203, in script call
+    call location_abstract
+  File "add.rpy", line 640, in script
+    show coinimage
+  File "D:\renpy\renpy-7.4.8-sdk/renpy/ast.py", line 1192, in execute
+    show_imspec(self.imspec, atl=getattr(self, "atl", None))
+  File "D:\renpy\renpy-7.4.8-sdk/renpy/ast.py", line 1162, in show_imspec
+    atl=atl)
+  File "D:\renpy\renpy-7.4.8-sdk/renpy/exports.py", line 770, in show
+    sls.add(layer, img, key, zorder, behind, at_list=at_list, name=name, atl=atl, default_transform=default_transform, transient=transient)
+  File "D:\renpy\renpy-7.4.8-sdk/renpy/display/core.py", line 1127, in add
+    thing.set_transform_event("show")
+  File "D:\renpy\renpy-7.4.8-sdk/renpy/display/transform.py", line 527, in set_transform_event
+    self.child.set_transform_event(event)
+  File "D:\renpy\renpy-7.4.8-sdk/renpy/display/image.py", line 489, in set_transform_event
+    return self.target.set_transform_event(event)
+  File "D:\renpy\renpy-7.4.8-sdk/renpy/display/image.py", line 719, in set_transform_event
+    self.find_target()
+  File "D:\renpy\renpy-7.4.8-sdk/renpy/display/image.py", line 652, in find_target
+    raise Exception(error)
+Exception: DynamicImage u'[coinpic]': could not find image. (u'castellan_coins')
+
+Windows-10-10.0.19041
+Ren'Py 7.4.8.1895
+randal_may_monastry 1.0
+Thu Aug 18 23:16:36 2022

@@ -1,0 +1,10 @@
+﻿I'm sorry, but errors were detected in your script. Please correct the
+errors listed below, and try again.
+
+
+File "add.rpy", line 642: Line is indented, but the preceding show statement statement does not expect a block. Please check this line's indentation.
+    if location_object.visited  == False:
+    ^
+
+Ren'Py Version: Ren'Py 7.4.8.1895
+Thu Aug 18 23:14:12 2022

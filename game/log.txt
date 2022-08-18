@@ -1,0 +1,71 @@
+Fri Aug 19 01:03:11 2022
+Windows-10-10.0.19041
+Ren'Py 7.4.8.1895
+ 
+
+Bootstrap to the start of init.init took 0.10s
+Early init took 0.00s
+Loader init took 0.07s
+Loading error handling took 0.02s
+Loading script took 0.40s
+Loading save slot metadata. took 0.02s
+Loading persistent took 0.00s
+Importing _renpysteam: ImportError('No module named _renpysteam',)
+Running init code took 0.08s
+Loading analysis data took 0.05s
+Analyze and compile ATL took 0.00s
+Index archives took 0.00s
+Backing up script files to 'C:\\Users\\Anarky\\AppData\\Roaming/RenPy/backups\\game':
+Dump and make backups. took 0.01s
+Cleaning cache took 0.00s
+Making clean stores took 0.00s
+Initial gc. took 0.03s
+DPI scale factor: 1.000000
+nvdrs: Loaded, about to disable thread optimizations.
+nvdrs: Disabled thread optimizations.
+Creating interface object took 0.24s
+Cleaning stores took 0.00s
+Init translation took 0.04s
+Build styles took 0.00s
+Load screen analysis took 0.00s
+Analyze screens took 0.02s
+Save screen analysis took 0.09s
+Prepare screens took 0.08s
+Save pyanalysis. took 0.22s
+Save bytecode. took 0.03s
+﻿Ren'Py 7.4.8.1895 lint report, generated at: Fri Aug 19 01:03:13 2022
+
+add.rpy:335 The screen monastry_map has not been given a parameter list.
+This can be fixed by writing 'screen monastry_map():' instead.
+
+add.rpy:381 The screen hud_screen has not been given a parameter list.
+
+add.rpy:470 The screen quest_list_scene has not been given a parameter list.
+
+add.rpy:492 The screen items_list_scene has not been given a parameter list.
+
+add.rpy:515 The screen quest_descr_screen has not been given a parameter list.
+
+add.rpy:534 The screen show_inventory_icons has not been given a parameter list.
+
+add.rpy:583 The screen show_inventory_detailed_stats has not been given a parameter list.
+
+add.rpy:649 The screen show_location_items has not been given a parameter list.
+
+script.rpy:6 'define i' replaces a Ren'Py built-in name, which may cause problems.
+
+script.rpy:527 The screen chapel_nav has not been given a parameter list.
+
+script.rpy:629 The screen kitchen_nav has not been given a parameter list.
+
+
+Statistics:
+
+The game contains 72 dialogue blocks, containing 440 words and 2,792
+characters, for an average of 6.1 words and 39 characters per block.
+
+The game contains 14 menus, 2 images, and 37 screens.
+
+
+Lint is not a substitute for thorough testing. Remember to update Ren'Py
+before releasing. New releases fix bugs and improve compatibility.
