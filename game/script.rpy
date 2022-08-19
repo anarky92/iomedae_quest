@@ -1,4 +1,10 @@
-﻿# Определение персонажей игры:
+﻿# Tech stuff
+
+#define config.automatic_images = [ '\\', ':', '_', '-', '/' ]
+define config.automatic_images = [ '/' ]
+define config.automatic_images_strip = [ "images" ]
+
+# Определение персонажей игры:
 
 define r = Character("Рэндал", color="#c8ffc8")
 define e = Character('Амариэ', color="#c800c8")
@@ -61,6 +67,10 @@ label start:
 
     python:
 
+        location_object = None
+
+        object_to_interact = None
+
         InventoryItemDict = {   'alch_fire' : AlchFireItemDescrText,
                                 'clothes_ofic' : ClothesOficItemDescrText,
                                 'dagger' : DaggerItemDescrText,
@@ -116,6 +126,9 @@ label start:
             pic = None
         )
 
+
+        randomforce = ForceClass(1)
+
         castellannpc = CharClass(
             hp = 100,
             magic = False,
@@ -150,39 +163,39 @@ label start:
             pic = "castellan"
         )
 
-#         randal = CharClass(
-#             hp = 100,
-#             magic = False,
-#             material = True,
-#             descr = "Главный герой собственно. Хотя как вы видите эту надпись я хз.",
-#             name = "Рэндал Мэй",
-#             force = 9,
-#             dexterity = 11,
-#             charisma = 16,
-#             intellect = 16,
-#             abils = ["Ordinary weapon"],
-#             weight = 70,
-#             size = "middle",
-#             hands = 2,
-#             legs = 2,
-#             heads = 1,
-#             tails = 0,
-#             nat_armor = 4,
-#             speed = 20,
-#             age = 25,
-#             alignment = [0, -26],
-#             cheerfulness = 100,
-#             satiety = 100,
-#             inventory = [],
-#             hat = None,
-#             clothes = None,
-#             armor = None,
-#             left_hand_item = None,
-#             right_hand_item = None,
-#             religion = None,
-#             alias = None,
-#             pic = None
-#         )
+        randal = CharClass(
+            hp = 100,
+            magic = False,
+            material = True,
+            descr = "Главный герой собственно. Хотя как вы видите эту надпись я хз.",
+            name = "Рэндал Мэй",
+            force = 9,
+            dexterity = 11,
+            charisma = 16,
+            intellect = 16,
+            abils = ["Ordinary weapon"],
+            weight = 70,
+            size = "middle",
+            hands = 2,
+            legs = 2,
+            heads = 1,
+            tails = 0,
+            nat_armor = 4,
+            speed = 20,
+            age = 25,
+            alignment = [0, -26],
+            cheerfulness = 100,
+            satiety = 100,
+            inventory = [],
+            hat = None,
+            clothes = None,
+            armor = None,
+            left_hand_item = None,
+            right_hand_item = None,
+            religion = None,
+            alias = None,
+            pic = None
+        )
 
 
         GoldenCoin = CoinClass(
@@ -207,27 +220,17 @@ label start:
 
         CastellanGoldenBunch = ItemBunchClass(GoldenCoin, 100, "castellan_coins")
 
-#         StorageLocation = LocationClass(
-#             name = "storage",
-#             animals = None,
-#             npcs = [castellannpc],
-#             doors = ["storage_exit"],
-#             objects = [CastellanGoldenBunch],
-#             loc_description = "Склад! Надо будет найти способ наведаться сюда без свидетелей..."
-#         )
-
         StorageLocation = LocationClass(
             name = "storage",
-            animals = None,
-            npcs = None,
+            animals = [],
+            npcs = [castellannpc],
             doors = ["storage_exit"],
             objects = [CastellanGoldenBunch],
             loc_description = "Склад! Надо будет найти способ наведаться сюда без свидетелей..."
         )
 
     if DEBUG==True:
-        $ location_object = StorageLocation
-        call location_abstract
+        call monastry_map_loc
         #call pic_inventory_label
         #call diary_main_loc from _call_diary_main_loc
         #call diary_main_loc from _call_diary_main_loc

@@ -58,6 +58,8 @@ init python:
         else:
             return len(ItemsArray) // InventoryHSizeItems
 
+
+
     class ItemClass():
 
         def __init__(self, **kwargs):
@@ -149,23 +151,24 @@ init python:
             self.item = item
             self.num = number
             self.pic = pic
-
-        def name (self):
-            if self.item.itemtype == "Weapon":
+            if item.itemtype == "Weapon":
                 _bunchtype = "Связка"
-            elif self.item.itemtype == "Potion":
+            elif item.itemtype == "Potion":
                 _bunchtype = "Ящик с"
-            elif self.item.itemtype == "Coin":
+            elif item.itemtype == "Coin":
                 _bunchtype = "Пригоршня"
-            elif self.item.itemtype == "Text":
+            elif item.itemtype == "Text":
                 _bunchtype = "Стопка"
             else:
                 _bunchtype = "Куча"
 
-            return _bunchtype + " c " + str(self.number) + " " + self.item.name
+            self.name =  _bunchtype + " c " + str(number) + " " + item.name
+
 
 
     class InvetoryClass():
+
+        items = []
 
         def __init__(self, initial_items):
             self.items.extend(initial_items)
@@ -178,7 +181,8 @@ init python:
             else:
                 for i in range (item.num):
                     self.items.append(item)
-                    renpy.display_notify(str(item.num), item.name, 'added in inventory')
+                    _notify_text = str(item.num) + " " + item.item.name +  's added in inventory'
+                    renpy.display_notify(_notify_text)
 
         def PrintItems(self):
             print("Invetory contains:")
@@ -192,6 +196,33 @@ init python:
                 print(item.name, 'removed from inventory')
             except ValueError:
                 print('There is no', item.name, 'in inventory')
+
+    class StatClass():
+
+        def __init__(self, value):
+            self.statvalue = value
+
+        def DecreaseStat(self, value):
+            if self.statvalue > value:
+                self.statvalue -= value
+            else:
+                self.statvalue = 0
+
+        def IncreaseStat(self, value):
+            self.statvalue += value
+
+    class ForceClass(StatClass):
+        stattype = "Force"
+
+    class DexterityClass(StatClass):
+        stattype = "Dexterity"
+
+    class CharismaClass(StatClass):
+        stattype = "Charisma"
+
+    class IntellectClass(StatClass):
+        stattype = "Charisma"
+
 
     class CreatureClass():
 
@@ -264,7 +295,7 @@ init python:
 
         def __init__(self, **kwargs):
             super().__init__(**kwargs)
-            self.inventory = kwargs['inventory']
+            self.inventory = InvetoryClass(kwargs['inventory'])
             self.hat = kwargs['hat']
             self.clothes = kwargs['clothes']
             self.armor = kwargs['armor']
@@ -275,16 +306,6 @@ init python:
         def GetDamage (self, damage):
             if damage > self.nat_armor + self.armor.value:
                 self.hp -= damage - self.armor.value
-
-        class test_class0():
-            def __init__(self, **kwargs):
-                self.test0 = kwargs['test0']
-
-
-        class test_class1(test_class0):
-            def __init__(self, **kwargs):
-                super().__init__(**kwargs)
-                self.test1 = kwargs['test1']
 
 label time_forward_h(delay):
 
@@ -356,9 +377,8 @@ screen monastry_map:
         hotspot (1263,768,154,51) action Call ("interloc_time_advance", "hopital_loc") # Больница
         hotspot (1491,105,104,50) action Call ("interloc_time_advance", "main_gates_loc") # Мельница
         hotspot (552,757,115,52):
-            action Call ("location_abstract") # Склад
-            python:
-                location_object = StorageLocation
+            action [SetVariable("location_object", StorageLocation), Call("location_abstract")]
+#             action Call ("location_abstract") $ location_object = StorageLocation # Склад
         # hotspot (353,140,157,56) action Jump ("start") # Гостевой дом
         # hotspot (685,76,270,52) action Jump ("start") # Дом преподавателей
         # hotspot (394,526,139,53) action Jump ("start") # Трапезная
@@ -611,33 +631,20 @@ label inventory_item_del(RmItemKey):
 
 label location_abstract:
 
-    #$ location_object = eval(location_object_name)
-    $ location_object_name = location_object.name
-    $ location_object_npcs = location_object.npcs
-    $ location_object_visited = location_object.visited
-    python:
-        location_object_npcs_pic = []
-        if location_object.npcs != None:
-            for i in range (len(location_object.npcs)):
-                location_object_npcs_pic.append(location_object.npc[i].pic)
-
-    #$ bg_img = location_object_name + "_bg_full.png"
-
     $ bg_img = location_object.name +  "_bg_full.png"
-
     image bg_main = "[bg_img]"
 
-    #$ renpy.scene ()
-    # $ renpy.scene (bg_img)
-    #$ renpy.scene ("storage_bg_full")
-
     scene bg_main
+    if location_object.objects != []:
+        python:
+            for i in range(len(location_object.objects)):
+                itempic = "/" + location_object.name + "/" + location_object.objects[i].pic + "_idle"
+#                 renpy.show(itempic)
 
-    $ coinpic = location_object.name + "/" + location_object.objects[0].pic + "_idle.png"
+                renpy.show("storage castellan_coins_idle")
+                #renpy.show("storage castellan coins idle")
 
-    image coinimage = "[coinpic]"
 
-    show coinimage
 
     if location_object.visited  == False:
         $ location_object.visited = True
@@ -647,41 +654,40 @@ label location_abstract:
     call screen show_location_items
 
     screen show_location_items:
-        if location_object.npcs != None:
+        if location_object.npcs != []:
             for i in range(len(location_object.npcs)):
-                imagebutton auto (i + "/" + i + "_%s.png") focus_mask True action Call ("location_abstract", "StorageLocation")
+                imagebutton auto (location_object.npcs[i].pic + "/" + location_object.npcs[i].pic + "_%s.png") focus_mask True action Call ("location_abstract")
 
-        if location_object.objects != None:
+        if location_object.objects != []:
             for i in range(len(location_object.objects)):
-                imagebutton auto (location_object.name + "/" + location_object.objects[i].pic + "_%s.png") focus_mask True action Jump ("monastry_map_loc")
-
-
+                $ object_to_interact = location_object.objects[i]
+                imagebutton auto (location_object.name + "/" + location_object.objects[i].pic + "_%s.png") focus_mask True action [SetVariable("object_to_interact", location_object.objects[i]), Jump ("object_interact_abstract")]
 
         imagebutton auto "ui/map_button_%s.png" focus_mask True action Jump ("monastry_map_loc")
 
-
-
     return
 
-# label object_interact_abstract(object_to_interact, location_object):
-#
-#     scene (location_object.name + "_bg_full.png")
-#     $renpy.pause (1.0)
-#     show ("items/" + object_to_interact.pic + ".png")
-#     object_to_interact.name
-#
-#     menu:
-#         "Рассмотреть":
-#             object_to_interact.name
-#             return
-#         "Украсть":
-#             randal.inventory.AddItem(object_to_interact)
-#             location_object.RemoveObject(object_to_interact)
-#             return
-#         "Сломать":
-#             r "Это как?"
-#             return
-#     return
+label object_interact_abstract:
+
+    $ itempic = "items/" + object_to_interact.pic + ".png"
+    image itemimage = "[itempic]"
+    show itemimage
+    "[object_to_interact.name]"
+
+    $ objname = object_to_interact.name
+
+    menu:
+        "Рассмотреть":
+            "[objname]"
+            jump object_interact_abstract
+        "Украсть":
+            $ randal.inventory.AddItem(object_to_interact)
+            $ location_object.RemoveObject(object_to_interact)
+            jump location_abstract
+        "Сломать":
+            r "Это как?"
+            jump object_interact_abstract
+    return
 #
 #
 # label dialoge_abstract(npc_for_talk, location_object):
