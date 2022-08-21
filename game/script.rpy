@@ -71,6 +71,8 @@ label start:
 
         object_to_interact = None
 
+        person_to_interact = None
+
         InventoryItemDict = {   'alch_fire' : AlchFireItemDescrText,
                                 'clothes_ofic' : ClothesOficItemDescrText,
                                 'dagger' : DaggerItemDescrText,
@@ -160,7 +162,9 @@ label start:
             right_hand_item = None,
             religion = "Iomedae",
             alias = None,
-            pic = "castellan"
+            pic = "castellan",
+            questlist = [],
+            textcolor = "#c80f08"
         )
 
         randal = CharClass(
@@ -194,7 +198,9 @@ label start:
             right_hand_item = None,
             religion = None,
             alias = None,
-            pic = None
+            pic = None,
+            questlist = [],
+            textcolor = "#c8ffc8"
         )
 
 
@@ -220,13 +226,24 @@ label start:
 
         CastellanGoldenBunch = ItemBunchClass(GoldenCoin, 100, "castellan_coins")
 
+        storageexit = DoorObjectClass(
+            way_to = "monastry_map_loc",
+            closed = False,
+            locked = False,
+            lock_difficulty = None,
+            strength = None,
+            descr = "Выход во двор монастря со склада",
+            pic = "go_back"
+        )
+
         StorageLocation = LocationClass(
             name = "storage",
             animals = [],
             npcs = [castellannpc],
-            doors = ["storage_exit"],
+            doors = [storageexit],
             objects = [CastellanGoldenBunch],
-            loc_description = "Склад! Надо будет найти способ наведаться сюда без свидетелей..."
+            loc_description = "Склад! Надо будет найти способ наведаться сюда без свидетелей...",
+            pic = "storage"
         )
 
     if DEBUG==True:

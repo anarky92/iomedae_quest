@@ -91,7 +91,6 @@ init python:
                 self.hp = self.hp - damage
 
     class LocationClass:
-
         def __init__ (self,  **kwargs):
             self.name = kwargs['name']
             self.animals = kwargs['animals']
@@ -100,6 +99,7 @@ init python:
             self.objects = kwargs['objects']
             self.visited = False
             self.loc_description = kwargs['loc_description']
+            self.pic = kwargs['pic']
 
         def RemoveObject (self, object):
             try:
@@ -302,10 +302,48 @@ init python:
             self.left_hand_item = kwargs['left_hand_item']
             self.right_hand_item = kwargs['right_hand_item']
             self.religion = kwargs['religion']
+            self.questlist = kwargs['questlist']
+            self.textcolor =  kwargs['textcolor']
 
         def GetDamage (self, damage):
             if damage > self.nat_armor + self.armor.value:
                 self.hp -= damage - self.armor.value
+
+#     class ProtagonistClass(CharClass):
+#
+#         def __init__(self, **kwargs):
+#             super().__init__(**kwargs)
+
+    class DoorObjectClass():
+        def __init__(self, **kwargs):
+            self.way_to = kwargs['way_to']
+            self.closed = kwargs['closed']
+            self.locked = kwargs['locked']
+            self.lock_difficulty = kwargs['lock_difficulty']
+            self.strength = kwargs['strength']
+            self.descr = kwargs['descr']
+            self.pic = kwargs['pic']
+
+    def ShowLocationPic (location):
+        renpy.scene()
+        _text_buffer = location.name +  "_bg_full"
+        renpy.show(_text_buffer)
+        if location.doors != []:
+            for i in range(len(location.doors)):
+                _text_buffer = location.pic + " " + location.doors[i].pic + "_idle"
+                renpy.show(_text_buffer, zorder = 2)
+
+        if location.npcs != []:
+            for i in range(len(location.npcs)):
+                _text_buffer = location.npcs[i].pic + " " + location.npcs[i].pic + "_idle"
+                renpy.show(_text_buffer, zorder = 2)
+
+        if location.objects != []:
+            for i in range(len(location.objects)):
+                _text_buffer = location.pic + " " + location.objects[i].pic + "_idle"
+                renpy.show(_text_buffer, zorder = 4)
+
+        return 0
 
 label time_forward_h(delay):
 
@@ -631,20 +669,7 @@ label inventory_item_del(RmItemKey):
 
 label location_abstract:
 
-    $ bg_img = location_object.name +  "_bg_full.png"
-    image bg_main = "[bg_img]"
-
-    scene bg_main
-    if location_object.objects != []:
-        python:
-            for i in range(len(location_object.objects)):
-                itempic = "/" + location_object.name + "/" + location_object.objects[i].pic + "_idle"
-#                 renpy.show(itempic)
-
-                renpy.show("storage castellan_coins_idle")
-                #renpy.show("storage castellan coins idle")
-
-
+    $ ShowLocationPic(location_object)
 
     if location_object.visited  == False:
         $ location_object.visited = True
@@ -656,12 +681,17 @@ label location_abstract:
     screen show_location_items:
         if location_object.npcs != []:
             for i in range(len(location_object.npcs)):
-                imagebutton auto (location_object.npcs[i].pic + "/" + location_object.npcs[i].pic + "_%s.png") focus_mask True action Call ("location_abstract")
+                imagebutton auto (location_object.npcs[i].pic + "/" + location_object.npcs[i].pic + "_%s.png") focus_mask True action [SetVariable("person_to_interact", location_object.npcs[i]), Jump ("dialoge_abstract")]
 
         if location_object.objects != []:
             for i in range(len(location_object.objects)):
                 $ object_to_interact = location_object.objects[i]
                 imagebutton auto (location_object.name + "/" + location_object.objects[i].pic + "_%s.png") focus_mask True action [SetVariable("object_to_interact", location_object.objects[i]), Jump ("object_interact_abstract")]
+
+        if location_object.doors != []:
+            for i in range(len(location_object.doors)):
+                $ doorway = location_object.doors[i].way_to
+                imagebutton auto (location_object.pic + "/" + location_object.doors[i].pic + "_%s.png") focus_mask True action Jump(doorway)
 
         imagebutton auto "ui/map_button_%s.png" focus_mask True action Jump ("monastry_map_loc")
 
@@ -669,9 +699,10 @@ label location_abstract:
 
 label object_interact_abstract:
 
-    $ itempic = "items/" + object_to_interact.pic + ".png"
-    image itemimage = "[itempic]"
-    show itemimage
+    $ itempic = "items " + object_to_interact.pic + ".png"
+    $ renpy.show(itempic, zorder = 6)
+#     image itemimage = "[itempic]"
+#     show itemimage zorder 6
     "[object_to_interact.name]"
 
     $ objname = object_to_interact.name
@@ -687,31 +718,31 @@ label object_interact_abstract:
         "Сломать":
             r "Это как?"
             jump object_interact_abstract
+
+label dialoge_abstract():
+
+    python:
+        ShowLocationPic(location_object)
+        renpy.hide (person_to_interact.pic + " " +  person_to_interact.pic + "_idle")
+        renpy.show (person_to_interact.pic + " " +  person_to_interact.pic + "_talk")
+
+    r "Добрый день!"
+
+    $ renpy.say(renpy.character(person_to_interact.name, color=person_to_interact.textcolor), "Здравствуй, Рэнадл!")
+
+    menu:
+        "Обокрасть":
+            r "Не хочу красть у [npc_for_talk.name]"
+            jump dialoge_abstract
+        "Напасть":
+            r "Да меня [npc_for_talk.name] отпиздит!"
+            jump dialoge_abstract
+        "Оценить отношение":
+            $ renpy.say(renpy.character(person_to_interact.name, color=person_to_interact.textcolor), "Ты даже не даже!")
+            jump location_abstract
+        "Прокрастья мимо":
+            $ renpy.say(renpy.character(person_to_interact.name, color=person_to_interact.textcolor), "Куда это ты собрался?")
+            jump location_abstract
+        "Ну пошел я":
+            jump location_abstract
     return
-#
-#
-# label dialoge_abstract(npc_for_talk, location_object):
-#
-#     scene (location_object.name + "_bg_clean.png")
-#     $renpy.pause (1.0)
-#     show (npc_for_talk.pic)
-#
-#
-#     r "Добрый день!"
-#
-#     npc_for_talk.alias "Здравствуй, Рэнадл!"
-#
-#     menu:
-#         "Обокрасть":
-#             r ("Не хочу красть у " + npc_for_talk.name)
-#             return
-#         "Напасть":
-#             r ("Да меня " + npc_for_talk.name + " отпиздит!")
-#             return
-#         "Оценить отношение":
-#             npc_for_talk.alias "Ты даже не даже!"
-#             return
-#         "Прокрастья мимо":
-#             npc_for_talk.alias "Куда это ты собрался?"
-#             return
-#     return
