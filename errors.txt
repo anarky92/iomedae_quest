@@ -2,10 +2,9 @@
 errors listed below, and try again.
 
 
-File "game/add.rpy", line 33: unexpected indent
-        def GetItemDescrText (ItemName):
-        ^
-    
+File "game/script.rpy", line 6: expected statement.
+    config.debug_image_cache = True
+                             ^
 
-Ren'Py Version: Ren'Py 7.4.8.1895
-Fri Oct 15 01:14:54 2021
+Ren'Py Version: Ren'Py 8.0.2.22081402
+Fri Aug 26 00:15:34 2022

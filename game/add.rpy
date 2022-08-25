@@ -3,6 +3,12 @@
 init python:
     # TO DO add descriptions from JSON & create data structures for locationinfo, questinfo etc.
 
+    renpy.image("storage_bg", Image("storage/storage_bg.png"))
+    renpy.image("castellan_idle", Image("castellan/castellan_idle.png"))
+    renpy.image("castellan_coins_idle", Image("storage/castellan_coins_idle.png"))
+    renpy.image("castellan_coins", Image("items/castellan_coins.png"))
+    renpy.image("storage_go_back_idle", Image("storage/go_back_idle.png"))
+
     def GetItemDescrText (ItemName):
 
         if ItemName == "alch_fire" :
@@ -79,6 +85,7 @@ init python:
             self.weight = kwargs['weight']
             self.icon = kwargs['icon']
             self.pic = kwargs['pic']
+            self.latch = False
 
         def IsBroken (self):
             if self.hp <= 0:
@@ -151,6 +158,7 @@ init python:
             self.item = item
             self.num = number
             self.pic = pic
+            self.latch = False
             if item.itemtype == "Weapon":
                 _bunchtype = "Связка"
             elif item.itemtype == "Potion":
@@ -304,6 +312,8 @@ init python:
             self.religion = kwargs['religion']
             self.questlist = kwargs['questlist']
             self.textcolor =  kwargs['textcolor']
+            self.charobject = kwargs['charobject']
+            self.latch = False
 
         def GetDamage (self, damage):
             if damage > self.nat_armor + self.armor.value:
@@ -326,21 +336,21 @@ init python:
 
     def ShowLocationPic (location):
         renpy.scene()
-        _text_buffer = location.name +  "_bg_full"
+        _text_buffer = location.pic +  "_bg"
         renpy.show(_text_buffer)
         if location.doors != []:
             for i in range(len(location.doors)):
-                _text_buffer = location.pic + " " + location.doors[i].pic + "_idle"
+                _text_buffer = location.doors[i].pic + "_idle"
                 renpy.show(_text_buffer, zorder = 2)
 
         if location.npcs != []:
             for i in range(len(location.npcs)):
-                _text_buffer = location.npcs[i].pic + " " + location.npcs[i].pic + "_idle"
+                _text_buffer = location.npcs[i].pic + "_idle"
                 renpy.show(_text_buffer, zorder = 2)
 
         if location.objects != []:
             for i in range(len(location.objects)):
-                _text_buffer = location.pic + " " + location.objects[i].pic + "_idle"
+                _text_buffer = location.objects[i].pic + "_idle"
                 renpy.show(_text_buffer, zorder = 4)
 
         return 0
@@ -699,17 +709,20 @@ label location_abstract:
 
 label object_interact_abstract:
 
-    $ itempic = "items " + object_to_interact.pic + ".png"
+    $ itempic = object_to_interact.pic
     $ renpy.show(itempic, zorder = 6)
 #     image itemimage = "[itempic]"
 #     show itemimage zorder 6
-    "[object_to_interact.name]"
 
-    $ objname = object_to_interact.name
+
+    python:
+        if object_to_interact.latch == False:
+            object_to_interact.latch = True
+            "[object_to_interact.name]"
 
     menu:
         "Рассмотреть":
-            "[objname]"
+            "[object_to_interact.name]"
             jump object_interact_abstract
         "Украсть":
             $ randal.inventory.AddItem(object_to_interact)
@@ -726,22 +739,24 @@ label dialoge_abstract():
         renpy.hide (person_to_interact.pic + " " +  person_to_interact.pic + "_idle")
         renpy.show (person_to_interact.pic + " " +  person_to_interact.pic + "_talk")
 
-    r "Добрый день!"
-
-    $ renpy.say(renpy.character(person_to_interact.name, color=person_to_interact.textcolor), "Здравствуй, Рэнадл!")
+    # r "Добрый день!"
+    python:
+        if person_to_interact.latch == False:
+            person_to_interact.latch = True
+            renpy.say(person_to_interact.charobject, "Здравствуй, Рэндал!")
 
     menu:
         "Обокрасть":
-            r "Не хочу красть у [npc_for_talk.name]"
+            r "Не хочу красть у [person_to_interact.name]"
             jump dialoge_abstract
         "Напасть":
-            r "Да меня [npc_for_talk.name] отпиздит!"
+            r "Да меня [person_to_interact.name] отпиздит!"
             jump dialoge_abstract
         "Оценить отношение":
-            $ renpy.say(renpy.character(person_to_interact.name, color=person_to_interact.textcolor), "Ты даже не даже!")
+            $ renpy.say(person_to_interact.charobject, "Ты даже не даже!")
             jump location_abstract
         "Прокрастья мимо":
-            $ renpy.say(renpy.character(person_to_interact.name, color=person_to_interact.textcolor), "Куда это ты собрался?")
+            $ renpy.say(person_to_interact.charobject, "Куда это ты собрался?")
             jump location_abstract
         "Ну пошел я":
             jump location_abstract

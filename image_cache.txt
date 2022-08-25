@@ -1,0 +1,418 @@
+Fri Aug 26 01:19:34 2022
+Windows-10-10.0.19042
+Ren'Py 8.0.2.22081402
+randal_may_monastry 1.0
+
+----
+renpy/common/00gltest.rpy 390
+----
+renpy/common/_layout/screen_main_menu.rpym 28
+Total Miss <renpy.display.im.Image object ('_transparent_tile.png') at 0x0000000005830b50>
+Removed <renpy.display.im.Image object ('_transparent_tile.png') at 0x0000000005830b50>
+Total Miss <renpy.display.im.Tile object at 0x0000000005830b20>
+Total Miss <renpy.display.im.Image object ('gui/main_menu.png') at 0x0000000005d267c0>
+Total Miss <renpy.display.im.Image object ('gui/overlay/main_menu.png') at 0x0000000005904dc0>
+Total Miss <renpy.display.im.Image object ('gui/button/idle_background.png') at 0x0000000005cfb850>
+Kept <renpy.display.im.Tile object at 0x0000000005830b20>
+Kept <renpy.display.im.Image object ('gui/main_menu.png') at 0x0000000005d2ca60>
+Added <renpy.display.im.Image object ('images/castle_far_away.jpg') at 0x00000000057d6340> (8.50%)
+Added <renpy.display.im.Image object ('images/classes.png') at 0x00000000057d6970> (11.13%)
+Added <renpy.display.im.Image object ('map_ground.jpg') at 0x0000000005d2e4f0> (13.77%)
+Added <renpy.display.im.Image object ('images/map_ground.jpg') at 0x0000000005d2eb20> (16.41%)
+Added <renpy.display.im.Image object ('images/map_hover.jpg') at 0x0000000005d2ec10> (19.04%)
+Added <renpy.display.im.Image object ('clock_0.png') at 0x0000000005d449d0> (19.85%)
+Added <renpy.display.im.Image object ('diary_idle.png') at 0x0000000005d56e20> (22.33%)
+Added <renpy.display.im.Image object ('diary_hover.png') at 0x0000000005d56be0> (22.35%)
+Added <renpy.display.im.Image object ('gui/textbox.png') at 0x0000000003266c40> (20.41%)
+Added <renpy.display.im.Image object ('icons/map_icon2_idle.png') at 0x0000000005d13e20> (20.42%)
+Added <renpy.display.im.Image object ('icons/map_icon2_hover.png') at 0x0000000005d13610> (20.43%)
+Added <renpy.display.im.Image object ('classes_idle.png') at 0x0000000005d139d0> (23.07%)
+Added <renpy.display.im.Image object ('classes_hover.png') at 0x0000000005d13af0> (23.13%)
+Added <renpy.display.im.Image object ('classes_door_idle.png') at 0x0000000005d13190> (23.19%)
+Total Miss <renpy.display.im.Image object ('gui/button/hover_background.png') at 0x0000000005db9e80>
+Added <renpy.display.im.Image object ('classes_door_hover.png') at 0x0000000005d13ee0> (23.29%)
+Added <renpy.display.im.Image object ('classes/table_idle.png') at 0x0000000005d08b20> (23.38%)
+Added <renpy.display.im.Image object ('classes/table_hover.png') at 0x0000000005d08040> (23.88%)
+Added <renpy.display.im.Image object ('classes/hexenhammer_idle.png') at 0x0000000005cfb580> (24.38%)
+Added <renpy.display.im.Image object ('classes/hexenhammer_hover.png') at 0x0000000005cfb400> (24.55%)
+Added <renpy.display.im.Image object ('gui/game_menu.png') at 0x0000000005d2ce20> (24.71%)
+Added <renpy.display.im.Image object ('gui/overlay/game_menu.png') at 0x0000000005904eb0> (27.35%)
+Added <renpy.display.im.Image object ('gui/button/radio_foreground.png') at 0x0000000005d8c1c0> (27.35%)
+Added <renpy.display.im.Image object ('gui/button/radio_selected_foreground.png') at 0x0000000005d8ed00> (27.35%)
+Added <renpy.display.im.Image object ('gui/button/check_foreground.png') at 0x0000000005d8e670> (27.35%)
+Added <renpy.display.im.Image object ('gui/button/check_selected_foreground.png') at 0x0000000005d8eb50> (27.35%)
+Added <renpy.display.im.Image object ('gui/slider/horizontal_idle_thumb.png') at 0x0000000005d8e040> (27.35%)
+Added <renpy.display.im.Image object ('gui/slider/horizontal_hover_thumb.png') at 0x0000000005d8e1c0> (27.35%)
+----
+game/script.rpy 269
+Total Miss <renpy.display.im.Image object ('clock_8.png') at 0x0000000005d13bb0>
+Total Miss <renpy.display.im.Image object ('gui/button/quick_idle_background.png') at 0x0000000005db7100>
+Kept <renpy.display.im.Tile object at 0x0000000005830b20>
+Kept <renpy.display.im.Image object ('images/classes.png') at 0x00000000057d6970>
+Kept <renpy.display.im.Image object ('images/castle_far_away.jpg') at 0x00000000057d6340>
+Kept <renpy.display.im.Image object ('map_ground.jpg') at 0x0000000005d26e20>
+Kept <renpy.display.im.Image object ('images/map_ground.jpg') at 0x0000000005cfbcd0>
+Kept <renpy.display.im.Image object ('images/map_hover.jpg') at 0x0000000005d26820>
+Kept <renpy.display.im.Image object ('clock_0.png') at 0x0000000005db51c0>
+Kept <renpy.display.im.Image object ('diary_idle.png') at 0x0000000005db5100>
+Kept <renpy.display.im.Image object ('diary_hover.png') at 0x0000000005db5760>
+Kept <renpy.display.im.Image object ('classes_idle.png') at 0x0000000005d139d0>
+Kept <renpy.display.im.Image object ('classes_hover.png') at 0x0000000005d13af0>
+Kept <renpy.display.im.Image object ('classes_door_idle.png') at 0x0000000005d13190>
+Kept <renpy.display.im.Image object ('classes_door_hover.png') at 0x0000000005d13ee0>
+Kept <renpy.display.im.Image object ('classes/table_idle.png') at 0x0000000005d08b20>
+Kept <renpy.display.im.Image object ('classes/table_hover.png') at 0x0000000005d08040>
+Kept <renpy.display.im.Image object ('classes/hexenhammer_idle.png') at 0x0000000005cfb580>
+Kept <renpy.display.im.Image object ('classes/hexenhammer_hover.png') at 0x0000000005cfb400>
+Kept <renpy.display.im.Image object ('gui/textbox.png') at 0x0000000003266c40>
+Kept <renpy.display.im.Image object ('icons/map_icon2_idle.png') at 0x0000000005d13e20>
+Kept <renpy.display.im.Image object ('icons/map_icon2_hover.png') at 0x0000000005d13610>
+Kept <renpy.display.im.Image object ('gui/main_menu.png') at 0x0000000005d2ca60>
+Kept <renpy.display.im.Image object ('gui/game_menu.png') at 0x0000000005d2ce20>
+Kept <renpy.display.im.Image object ('gui/overlay/game_menu.png') at 0x0000000005904eb0>
+Kept <renpy.display.im.Image object ('gui/button/radio_foreground.png') at 0x0000000005d8c1c0>
+Kept <renpy.display.im.Image object ('gui/button/radio_selected_foreground.png') at 0x0000000005d8ed00>
+Kept <renpy.display.im.Image object ('gui/button/check_foreground.png') at 0x0000000005d8e670>
+Kept <renpy.display.im.Image object ('gui/button/check_selected_foreground.png') at 0x0000000005d8eb50>
+Kept <renpy.display.im.Image object ('gui/slider/horizontal_idle_thumb.png') at 0x0000000005d8e040>
+Kept <renpy.display.im.Image object ('gui/slider/horizontal_hover_thumb.png') at 0x0000000005d8e1c0>
+----
+game/add.rpy 687
+Total Miss <renpy.display.im.Image object ('storage/storage_bg.png') at 0x00000000057ca430>
+Total Miss <renpy.display.im.Image object ('images/storage/go_back_idle.png') at 0x00000000057e7880>
+Total Miss <renpy.display.im.Image object ('castellan/castellan_idle.png') at 0x00000000057e7910>
+Total Miss <renpy.display.im.Image object ('storage/castellan_coins_idle.png') at 0x00000000057d6190>
+Kept <renpy.display.im.Tile object at 0x0000000005830b20>
+Kept <renpy.display.im.Image object ('images/classes.png') at 0x00000000057d6970>
+Kept <renpy.display.im.Image object ('images/castle_far_away.jpg') at 0x00000000057d6340>
+----
+game/add.rpy 687
+Total Miss <renpy.display.im.Image object ('gui/namebox.png') at 0x00000000032f98b0>
+Kept <renpy.display.im.Tile object at 0x0000000005830b20>
+Kept <renpy.display.im.Image object ('images/classes.png') at 0x00000000057d6970>
+Kept <renpy.display.im.Image object ('images/castle_far_away.jpg') at 0x00000000057d6340>
+Kept <renpy.display.im.Image object ('gui/textbox.png') at 0x0000000003266c40>
+Kept <renpy.display.im.Image object ('castellan/castellan_idle.png') at 0x0000000005dc2550>
+Kept <renpy.display.im.Image object ('storage/castellan_coins_idle.png') at 0x0000000005dc1700>
+Kept <renpy.display.im.Image object ('classes_idle.png') at 0x0000000005d139d0>
+Kept <renpy.display.im.Image object ('classes_hover.png') at 0x0000000005d13af0>
+Kept <renpy.display.im.Image object ('classes_door_idle.png') at 0x0000000005d13190>
+Kept <renpy.display.im.Image object ('classes_door_hover.png') at 0x0000000005d13ee0>
+Kept <renpy.display.im.Image object ('classes/table_idle.png') at 0x0000000005d08b20>
+Kept <renpy.display.im.Image object ('classes/table_hover.png') at 0x0000000005d08040>
+Kept <renpy.display.im.Image object ('classes/hexenhammer_idle.png') at 0x0000000005cfb580>
+Kept <renpy.display.im.Image object ('classes/hexenhammer_hover.png') at 0x0000000005cfb400>
+Kept <renpy.display.im.Image object ('icons/map_icon2_idle.png') at 0x0000000005d13e20>
+Kept <renpy.display.im.Image object ('icons/map_icon2_hover.png') at 0x0000000005d13610>
+Kept <renpy.display.im.Image object ('map_ground.jpg') at 0x0000000005d26e20>
+Kept <renpy.display.im.Image object ('images/map_ground.jpg') at 0x0000000005cfbcd0>
+Kept <renpy.display.im.Image object ('images/map_hover.jpg') at 0x0000000005d26820>
+Kept <renpy.display.im.Image object ('clock_0.png') at 0x0000000005db51c0>
+Kept <renpy.display.im.Image object ('diary_idle.png') at 0x0000000005db5100>
+Kept <renpy.display.im.Image object ('diary_hover.png') at 0x0000000005db5760>
+Added <renpy.display.im.Image object ('castellan/castellan_hover.png') at 0x0000000005dc2910> (35.12%)
+Kept <renpy.display.im.Image object ('gui/main_menu.png') at 0x0000000005d2ca60>
+Kept <renpy.display.im.Image object ('gui/game_menu.png') at 0x0000000005d2ce20>
+Kept <renpy.display.im.Image object ('gui/overlay/game_menu.png') at 0x0000000005904eb0>
+Kept <renpy.display.im.Image object ('gui/button/radio_foreground.png') at 0x0000000005d8c1c0>
+Kept <renpy.display.im.Image object ('gui/button/radio_selected_foreground.png') at 0x0000000005d8ed00>
+Kept <renpy.display.im.Image object ('gui/button/check_foreground.png') at 0x0000000005d8e670>
+Kept <renpy.display.im.Image object ('gui/button/check_selected_foreground.png') at 0x0000000005d8eb50>
+Kept <renpy.display.im.Image object ('gui/slider/horizontal_idle_thumb.png') at 0x0000000005d8e040>
+Kept <renpy.display.im.Image object ('gui/slider/horizontal_hover_thumb.png') at 0x0000000005d8e1c0>
+Added <renpy.display.im.Image object ('storage/castellan_coins_hover.png') at 0x0000000005dc1460> (35.86%)
+Added <renpy.display.im.Image object ('storage/go_back_idle.png') at 0x0000000005dc16a0> (36.90%)
+----
+game/add.rpy 689
+Added <renpy.display.im.Image object ('storage/go_back_hover.png') at 0x0000000005dc10a0> (36.97%)
+----
+game/add.rpy 689
+Total Miss <renpy.display.im.Image object ('ui/map_button_idle.png') at 0x0000000005dc1280>
+Kept <renpy.display.im.Tile object at 0x0000000005830b20>
+Kept <renpy.display.im.Image object ('images/classes.png') at 0x00000000057d6970>
+Kept <renpy.display.im.Image object ('images/castle_far_away.jpg') at 0x00000000057d6340>
+Kept <renpy.display.im.Image object ('castellan/castellan_idle.png') at 0x0000000005dc2520>
+Kept <renpy.display.im.Image object ('castellan/castellan_hover.png') at 0x0000000005dc2340>
+Kept <renpy.display.im.Image object ('storage/castellan_coins_idle.png') at 0x0000000005dc1610>
+Kept <renpy.display.im.Image object ('storage/castellan_coins_hover.png') at 0x0000000005dc1be0>
+Kept <renpy.display.im.Image object ('storage/go_back_idle.png') at 0x0000000005dbc880>
+Kept <renpy.display.im.Image object ('storage/go_back_hover.png') at 0x0000000005dbccd0>
+Kept <renpy.display.im.Image object ('ui/map_button_idle.png') at 0x0000000005dc1940>
+Kept <renpy.display.im.Image object ('classes_idle.png') at 0x0000000005d139d0>
+Kept <renpy.display.im.Image object ('classes_hover.png') at 0x0000000005d13af0>
+Kept <renpy.display.im.Image object ('classes_door_idle.png') at 0x0000000005d13190>
+Kept <renpy.display.im.Image object ('classes_door_hover.png') at 0x0000000005d13ee0>
+Kept <renpy.display.im.Image object ('classes/table_idle.png') at 0x0000000005d08b20>
+Kept <renpy.display.im.Image object ('classes/table_hover.png') at 0x0000000005d08040>
+Kept <renpy.display.im.Image object ('classes/hexenhammer_idle.png') at 0x0000000005cfb580>
+Kept <renpy.display.im.Image object ('classes/hexenhammer_hover.png') at 0x0000000005cfb400>
+Kept <renpy.display.im.Image object ('gui/textbox.png') at 0x0000000003266c40>
+Kept <renpy.display.im.Image object ('icons/map_icon2_idle.png') at 0x0000000005d13e20>
+Kept <renpy.display.im.Image object ('icons/map_icon2_hover.png') at 0x0000000005d13610>
+Kept <renpy.display.im.Image object ('map_ground.jpg') at 0x0000000005d26e20>
+Kept <renpy.display.im.Image object ('images/map_ground.jpg') at 0x0000000005cfbcd0>
+Kept <renpy.display.im.Image object ('images/map_hover.jpg') at 0x0000000005d26820>
+Kept <renpy.display.im.Image object ('clock_0.png') at 0x0000000005db51c0>
+Kept <renpy.display.im.Image object ('diary_idle.png') at 0x0000000005db5100>
+Kept <renpy.display.im.Image object ('diary_hover.png') at 0x0000000005db5760>
+Added <renpy.display.im.Image object ('ui/map_button_hover.png') at 0x0000000005dbc5b0> (37.09%)
+Kept <renpy.display.im.Image object ('gui/main_menu.png') at 0x0000000005d2ca60>
+Kept <renpy.display.im.Image object ('gui/game_menu.png') at 0x0000000005d2ce20>
+Kept <renpy.display.im.Image object ('gui/overlay/game_menu.png') at 0x0000000005904eb0>
+Kept <renpy.display.im.Image object ('gui/button/radio_foreground.png') at 0x0000000005d8c1c0>
+Kept <renpy.display.im.Image object ('gui/button/radio_selected_foreground.png') at 0x0000000005d8ed00>
+Kept <renpy.display.im.Image object ('gui/button/check_foreground.png') at 0x0000000005d8e670>
+Kept <renpy.display.im.Image object ('gui/button/check_selected_foreground.png') at 0x0000000005d8eb50>
+Kept <renpy.display.im.Image object ('gui/slider/horizontal_idle_thumb.png') at 0x0000000005d8e040>
+Kept <renpy.display.im.Image object ('gui/slider/horizontal_hover_thumb.png') at 0x0000000005d8e1c0>
+----
+game/add.rpy 723
+Total Miss <renpy.display.im.Image object ('items/castellan_coins.png') at 0x00000000057d62b0>
+----
+game/add.rpy 723
+Total Miss <renpy.display.im.Image object ('gui/button/choice_idle_background.png') at 0x0000000005d13a00>
+----
+game/add.rpy 723
+----
+game/add.rpy 723
+----
+game/add.rpy 723
+Kept <renpy.display.im.Tile object at 0x0000000005830b20>
+Kept <renpy.display.im.Image object ('images/classes.png') at 0x00000000057d6970>
+Kept <renpy.display.im.Image object ('gui/textbox.png') at 0x0000000003266c40>
+Kept <renpy.display.im.Image object ('castellan/castellan_idle.png') at 0x0000000005dc2520>
+Kept <renpy.display.im.Image object ('castellan/castellan_hover.png') at 0x0000000005dc2340>
+Kept <renpy.display.im.Image object ('storage/castellan_coins_idle.png') at 0x0000000005dc1610>
+Kept <renpy.display.im.Image object ('storage/castellan_coins_hover.png') at 0x0000000005dc1be0>
+Kept <renpy.display.im.Image object ('storage/go_back_idle.png') at 0x0000000005dbc880>
+Kept <renpy.display.im.Image object ('storage/go_back_hover.png') at 0x0000000005dbccd0>
+Kept <renpy.display.im.Image object ('ui/map_button_idle.png') at 0x0000000005dc1940>
+Kept <renpy.display.im.Image object ('ui/map_button_hover.png') at 0x0000000005dbc5b0>
+Kept <renpy.display.im.Image object ('gui/main_menu.png') at 0x0000000005d2ca60>
+Kept <renpy.display.im.Image object ('gui/game_menu.png') at 0x0000000005d2ce20>
+Kept <renpy.display.im.Image object ('gui/overlay/game_menu.png') at 0x0000000005904eb0>
+Kept <renpy.display.im.Image object ('gui/button/radio_foreground.png') at 0x0000000005d8c1c0>
+Kept <renpy.display.im.Image object ('gui/button/radio_selected_foreground.png') at 0x0000000005d8ed00>
+Kept <renpy.display.im.Image object ('gui/button/check_foreground.png') at 0x0000000005d8e670>
+Kept <renpy.display.im.Image object ('gui/button/check_selected_foreground.png') at 0x0000000005d8eb50>
+Kept <renpy.display.im.Image object ('gui/slider/horizontal_idle_thumb.png') at 0x0000000005d8e040>
+Kept <renpy.display.im.Image object ('gui/slider/horizontal_hover_thumb.png') at 0x0000000005d8e1c0>
+Total Miss <renpy.display.im.Image object ('gui/button/choice_hover_background.png') at 0x0000000005dc5160>
+----
+game/add.rpy 723
+Kept <renpy.display.im.Tile object at 0x0000000005830b20>
+Kept <renpy.display.im.Image object ('images/classes.png') at 0x00000000057d6970>
+Kept <renpy.display.im.Image object ('gui/textbox.png') at 0x0000000003266c40>
+Kept <renpy.display.im.Image object ('castellan/castellan_idle.png') at 0x0000000005dc2520>
+Kept <renpy.display.im.Image object ('castellan/castellan_hover.png') at 0x0000000005dc2340>
+Kept <renpy.display.im.Image object ('storage/castellan_coins_idle.png') at 0x0000000005dc1610>
+Kept <renpy.display.im.Image object ('storage/castellan_coins_hover.png') at 0x0000000005dc1be0>
+Kept <renpy.display.im.Image object ('storage/go_back_idle.png') at 0x0000000005dbc880>
+Kept <renpy.display.im.Image object ('storage/go_back_hover.png') at 0x0000000005dbccd0>
+Kept <renpy.display.im.Image object ('ui/map_button_idle.png') at 0x0000000005dc1940>
+Kept <renpy.display.im.Image object ('ui/map_button_hover.png') at 0x0000000005dbc5b0>
+Kept <renpy.display.im.Image object ('gui/main_menu.png') at 0x0000000005d2ca60>
+Kept <renpy.display.im.Image object ('gui/game_menu.png') at 0x0000000005d2ce20>
+Kept <renpy.display.im.Image object ('gui/overlay/game_menu.png') at 0x0000000005904eb0>
+Kept <renpy.display.im.Image object ('gui/button/radio_foreground.png') at 0x0000000005d8c1c0>
+Kept <renpy.display.im.Image object ('gui/button/radio_selected_foreground.png') at 0x0000000005d8ed00>
+Kept <renpy.display.im.Image object ('gui/button/check_foreground.png') at 0x0000000005d8e670>
+Kept <renpy.display.im.Image object ('gui/button/check_selected_foreground.png') at 0x0000000005d8eb50>
+Kept <renpy.display.im.Image object ('gui/slider/horizontal_idle_thumb.png') at 0x0000000005d8e040>
+Kept <renpy.display.im.Image object ('gui/slider/horizontal_hover_thumb.png') at 0x0000000005d8e1c0>
+----
+game/add.rpy 725
+----
+game/add.rpy 725
+Kept <renpy.display.im.Tile object at 0x0000000005830b20>
+Kept <renpy.display.im.Image object ('images/classes.png') at 0x00000000057d6970>
+Kept <renpy.display.im.Image object ('gui/textbox.png') at 0x0000000003266c40>
+Kept <renpy.display.im.Image object ('castellan/castellan_idle.png') at 0x0000000005dc2520>
+Kept <renpy.display.im.Image object ('castellan/castellan_hover.png') at 0x0000000005dc2340>
+Kept <renpy.display.im.Image object ('storage/castellan_coins_idle.png') at 0x0000000005dc1610>
+Kept <renpy.display.im.Image object ('storage/castellan_coins_hover.png') at 0x0000000005dc1be0>
+Kept <renpy.display.im.Image object ('storage/go_back_idle.png') at 0x0000000005dbc880>
+Kept <renpy.display.im.Image object ('storage/go_back_hover.png') at 0x0000000005dbccd0>
+Kept <renpy.display.im.Image object ('ui/map_button_idle.png') at 0x0000000005dc1940>
+Kept <renpy.display.im.Image object ('ui/map_button_hover.png') at 0x0000000005dbc5b0>
+Kept <renpy.display.im.Image object ('gui/main_menu.png') at 0x0000000005d2ca60>
+Kept <renpy.display.im.Image object ('gui/game_menu.png') at 0x0000000005d2ce20>
+Kept <renpy.display.im.Image object ('gui/overlay/game_menu.png') at 0x0000000005904eb0>
+Kept <renpy.display.im.Image object ('gui/button/radio_foreground.png') at 0x0000000005d8c1c0>
+Kept <renpy.display.im.Image object ('gui/button/radio_selected_foreground.png') at 0x0000000005d8ed00>
+Kept <renpy.display.im.Image object ('gui/button/check_foreground.png') at 0x0000000005d8e670>
+Kept <renpy.display.im.Image object ('gui/button/check_selected_foreground.png') at 0x0000000005d8eb50>
+Kept <renpy.display.im.Image object ('gui/slider/horizontal_idle_thumb.png') at 0x0000000005d8e040>
+Kept <renpy.display.im.Image object ('gui/slider/horizontal_hover_thumb.png') at 0x0000000005d8e1c0>
+----
+game/add.rpy 723
+Kept <renpy.display.im.Tile object at 0x0000000005830b20>
+Kept <renpy.display.im.Image object ('images/classes.png') at 0x00000000057d6970>
+----
+game/add.rpy 723
+----
+game/add.rpy 723
+----
+game/add.rpy 723
+----
+game/add.rpy 723
+----
+game/add.rpy 723
+----
+game/add.rpy 723
+----
+game/add.rpy 723
+Kept <renpy.display.im.Tile object at 0x0000000005830b20>
+Kept <renpy.display.im.Image object ('images/classes.png') at 0x00000000057d6970>
+Kept <renpy.display.im.Image object ('gui/textbox.png') at 0x0000000003266c40>
+Kept <renpy.display.im.Image object ('castellan/castellan_idle.png') at 0x0000000005dc2520>
+Kept <renpy.display.im.Image object ('castellan/castellan_hover.png') at 0x0000000005dc2340>
+Kept <renpy.display.im.Image object ('storage/castellan_coins_idle.png') at 0x0000000005dc1610>
+Kept <renpy.display.im.Image object ('storage/castellan_coins_hover.png') at 0x0000000005dc1be0>
+Kept <renpy.display.im.Image object ('storage/go_back_idle.png') at 0x0000000005dbc880>
+Kept <renpy.display.im.Image object ('storage/go_back_hover.png') at 0x0000000005dbccd0>
+Kept <renpy.display.im.Image object ('ui/map_button_idle.png') at 0x0000000005dc1940>
+Kept <renpy.display.im.Image object ('ui/map_button_hover.png') at 0x0000000005dbc5b0>
+Kept <renpy.display.im.Image object ('gui/main_menu.png') at 0x0000000005d2ca60>
+Kept <renpy.display.im.Image object ('gui/game_menu.png') at 0x0000000005d2ce20>
+Kept <renpy.display.im.Image object ('gui/overlay/game_menu.png') at 0x0000000005904eb0>
+Kept <renpy.display.im.Image object ('gui/button/radio_foreground.png') at 0x0000000005d8c1c0>
+Kept <renpy.display.im.Image object ('gui/button/radio_selected_foreground.png') at 0x0000000005d8ed00>
+Kept <renpy.display.im.Image object ('gui/button/check_foreground.png') at 0x0000000005d8e670>
+Kept <renpy.display.im.Image object ('gui/button/check_selected_foreground.png') at 0x0000000005d8eb50>
+Kept <renpy.display.im.Image object ('gui/slider/horizontal_idle_thumb.png') at 0x0000000005d8e040>
+Kept <renpy.display.im.Image object ('gui/slider/horizontal_hover_thumb.png') at 0x0000000005d8e1c0>
+----
+game/add.rpy 723
+----
+game/add.rpy 723
+Kept <renpy.display.im.Tile object at 0x0000000005830b20>
+Kept <renpy.display.im.Image object ('images/classes.png') at 0x00000000057d6970>
+Kept <renpy.display.im.Image object ('gui/textbox.png') at 0x0000000003266c40>
+Kept <renpy.display.im.Image object ('castellan/castellan_idle.png') at 0x0000000005dc2520>
+Kept <renpy.display.im.Image object ('castellan/castellan_hover.png') at 0x0000000005dc2340>
+Kept <renpy.display.im.Image object ('storage/castellan_coins_idle.png') at 0x0000000005dc1610>
+Kept <renpy.display.im.Image object ('storage/castellan_coins_hover.png') at 0x0000000005dc1be0>
+Kept <renpy.display.im.Image object ('storage/go_back_idle.png') at 0x0000000005dbc880>
+Kept <renpy.display.im.Image object ('storage/go_back_hover.png') at 0x0000000005dbccd0>
+Kept <renpy.display.im.Image object ('ui/map_button_idle.png') at 0x0000000005dc1940>
+Kept <renpy.display.im.Image object ('ui/map_button_hover.png') at 0x0000000005dbc5b0>
+Kept <renpy.display.im.Image object ('gui/main_menu.png') at 0x0000000005d2ca60>
+Kept <renpy.display.im.Image object ('gui/game_menu.png') at 0x0000000005d2ce20>
+Kept <renpy.display.im.Image object ('gui/overlay/game_menu.png') at 0x0000000005904eb0>
+Kept <renpy.display.im.Image object ('gui/button/radio_foreground.png') at 0x0000000005d8c1c0>
+Kept <renpy.display.im.Image object ('gui/button/radio_selected_foreground.png') at 0x0000000005d8ed00>
+Kept <renpy.display.im.Image object ('gui/button/check_foreground.png') at 0x0000000005d8e670>
+Kept <renpy.display.im.Image object ('gui/button/check_selected_foreground.png') at 0x0000000005d8eb50>
+Kept <renpy.display.im.Image object ('gui/slider/horizontal_idle_thumb.png') at 0x0000000005d8e040>
+Kept <renpy.display.im.Image object ('gui/slider/horizontal_hover_thumb.png') at 0x0000000005d8e1c0>
+----
+game/add.rpy 689
+Total Miss <renpy.display.im.Image object ('gui/notify.png') at 0x00000000058656a0>
+Kept <renpy.display.im.Tile object at 0x0000000005830b20>
+Kept <renpy.display.im.Image object ('images/classes.png') at 0x00000000057d6970>
+Kept <renpy.display.im.Image object ('images/castle_far_away.jpg') at 0x00000000057d6340>
+Kept <renpy.display.im.Image object ('castellan/castellan_idle.png') at 0x0000000005dc1a60>
+Kept <renpy.display.im.Image object ('castellan/castellan_hover.png') at 0x0000000005dc1d60>
+Kept <renpy.display.im.Image object ('storage/go_back_idle.png') at 0x0000000005d29fa0>
+Kept <renpy.display.im.Image object ('storage/go_back_hover.png') at 0x0000000005d29820>
+Kept <renpy.display.im.Image object ('ui/map_button_idle.png') at 0x0000000005cfb640>
+Kept <renpy.display.im.Image object ('ui/map_button_hover.png') at 0x0000000005d293a0>
+Kept <renpy.display.im.Image object ('classes_idle.png') at 0x0000000005d139d0>
+Kept <renpy.display.im.Image object ('classes_hover.png') at 0x0000000005d13af0>
+Kept <renpy.display.im.Image object ('classes_door_idle.png') at 0x0000000005d13190>
+Kept <renpy.display.im.Image object ('classes_door_hover.png') at 0x0000000005d13ee0>
+Kept <renpy.display.im.Image object ('classes/table_idle.png') at 0x0000000005d08b20>
+Kept <renpy.display.im.Image object ('classes/table_hover.png') at 0x0000000005d08040>
+Kept <renpy.display.im.Image object ('classes/hexenhammer_idle.png') at 0x0000000005cfb580>
+Kept <renpy.display.im.Image object ('classes/hexenhammer_hover.png') at 0x0000000005cfb400>
+Kept <renpy.display.im.Image object ('gui/textbox.png') at 0x0000000003266c40>
+Kept <renpy.display.im.Image object ('icons/map_icon2_idle.png') at 0x0000000005d13e20>
+Kept <renpy.display.im.Image object ('icons/map_icon2_hover.png') at 0x0000000005d13610>
+Kept <renpy.display.im.Image object ('map_ground.jpg') at 0x0000000005d26e20>
+Kept <renpy.display.im.Image object ('images/map_ground.jpg') at 0x0000000005cfbcd0>
+Kept <renpy.display.im.Image object ('images/map_hover.jpg') at 0x0000000005d26820>
+Kept <renpy.display.im.Image object ('clock_0.png') at 0x0000000005db51c0>
+Kept <renpy.display.im.Image object ('diary_idle.png') at 0x0000000005db5100>
+Kept <renpy.display.im.Image object ('diary_hover.png') at 0x0000000005db5760>
+Kept <renpy.display.im.Image object ('gui/main_menu.png') at 0x0000000005d2ca60>
+Kept <renpy.display.im.Image object ('gui/game_menu.png') at 0x0000000005d2ce20>
+Kept <renpy.display.im.Image object ('gui/overlay/game_menu.png') at 0x0000000005904eb0>
+Kept <renpy.display.im.Image object ('gui/button/radio_foreground.png') at 0x0000000005d8c1c0>
+Kept <renpy.display.im.Image object ('gui/button/radio_selected_foreground.png') at 0x0000000005d8ed00>
+Kept <renpy.display.im.Image object ('gui/button/check_foreground.png') at 0x0000000005d8e670>
+Kept <renpy.display.im.Image object ('gui/button/check_selected_foreground.png') at 0x0000000005d8eb50>
+Kept <renpy.display.im.Image object ('gui/slider/horizontal_idle_thumb.png') at 0x0000000005d8e040>
+Kept <renpy.display.im.Image object ('gui/slider/horizontal_hover_thumb.png') at 0x0000000005d8e1c0>
+----
+game/script.rpy 269
+Kept <renpy.display.im.Tile object at 0x0000000005830b20>
+Kept <renpy.display.im.Image object ('images/classes.png') at 0x00000000057d6970>
+Kept <renpy.display.im.Image object ('map_ground.jpg') at 0x0000000005cff430>
+Kept <renpy.display.im.Image object ('images/map_ground.jpg') at 0x0000000005cff5b0>
+Kept <renpy.display.im.Image object ('images/map_hover.jpg') at 0x0000000005cff670>
+Kept <renpy.display.im.Image object ('clock_0.png') at 0x0000000005cf0cd0>
+Kept <renpy.display.im.Image object ('diary_idle.png') at 0x0000000005d82a30>
+Kept <renpy.display.im.Image object ('diary_hover.png') at 0x0000000005d82d30>
+Kept <renpy.display.im.Image object ('classes_idle.png') at 0x0000000005d139d0>
+Kept <renpy.display.im.Image object ('classes_hover.png') at 0x0000000005d13af0>
+Kept <renpy.display.im.Image object ('classes_door_idle.png') at 0x0000000005d13190>
+Kept <renpy.display.im.Image object ('classes_door_hover.png') at 0x0000000005d13ee0>
+Kept <renpy.display.im.Image object ('classes/table_idle.png') at 0x0000000005d08b20>
+Kept <renpy.display.im.Image object ('classes/table_hover.png') at 0x0000000005d08040>
+Kept <renpy.display.im.Image object ('classes/hexenhammer_idle.png') at 0x0000000005cfb580>
+Kept <renpy.display.im.Image object ('classes/hexenhammer_hover.png') at 0x0000000005cfb400>
+Kept <renpy.display.im.Image object ('gui/textbox.png') at 0x0000000003266c40>
+Kept <renpy.display.im.Image object ('gui/main_menu.png') at 0x0000000005d2ca60>
+Kept <renpy.display.im.Image object ('gui/game_menu.png') at 0x0000000005d2ce20>
+Kept <renpy.display.im.Image object ('gui/overlay/game_menu.png') at 0x0000000005904eb0>
+Kept <renpy.display.im.Image object ('gui/button/radio_foreground.png') at 0x0000000005d8c1c0>
+Kept <renpy.display.im.Image object ('gui/button/radio_selected_foreground.png') at 0x0000000005d8ed00>
+Kept <renpy.display.im.Image object ('gui/button/check_foreground.png') at 0x0000000005d8e670>
+Kept <renpy.display.im.Image object ('gui/button/check_selected_foreground.png') at 0x0000000005d8eb50>
+Kept <renpy.display.im.Image object ('gui/slider/horizontal_idle_thumb.png') at 0x0000000005d8e040>
+Kept <renpy.display.im.Image object ('gui/slider/horizontal_hover_thumb.png') at 0x0000000005d8e1c0>
+----
+game/script.rpy 269
+----
+game/script.rpy 269
+Total Miss <renpy.display.im.Image object ('gui/overlay/confirm.png') at 0x0000000005de7dc0>
+Total Miss <renpy.display.im.Image object ('gui/frame.png') at 0x0000000005d4d850>
+----
+game/script.rpy 269
+----
+game/script.rpy 269
+----
+game/script.rpy 269
+----
+game/script.rpy 269
+----
+game/script.rpy 269
+----
+game/script.rpy 269
+Kept <renpy.display.im.Tile object at 0x0000000005830b20>
+Kept <renpy.display.im.Image object ('images/classes.png') at 0x00000000057d6970>
+Kept <renpy.display.im.Image object ('map_ground.jpg') at 0x0000000005cff430>
+Kept <renpy.display.im.Image object ('images/map_ground.jpg') at 0x0000000005cff5b0>
+Kept <renpy.display.im.Image object ('images/map_hover.jpg') at 0x0000000005cff670>
+Kept <renpy.display.im.Image object ('clock_0.png') at 0x0000000005cf0cd0>
+Kept <renpy.display.im.Image object ('diary_idle.png') at 0x0000000005d82a30>
+Kept <renpy.display.im.Image object ('diary_hover.png') at 0x0000000005d82d30>
+Kept <renpy.display.im.Image object ('classes_idle.png') at 0x0000000005d139d0>
+Kept <renpy.display.im.Image object ('classes_hover.png') at 0x0000000005d13af0>
+Kept <renpy.display.im.Image object ('classes_door_idle.png') at 0x0000000005d13190>
+Kept <renpy.display.im.Image object ('classes_door_hover.png') at 0x0000000005d13ee0>
+Kept <renpy.display.im.Image object ('classes/table_idle.png') at 0x0000000005d08b20>
+Kept <renpy.display.im.Image object ('classes/table_hover.png') at 0x0000000005d08040>
+Kept <renpy.display.im.Image object ('classes/hexenhammer_idle.png') at 0x0000000005cfb580>
+Kept <renpy.display.im.Image object ('classes/hexenhammer_hover.png') at 0x0000000005cfb400>
+Kept <renpy.display.im.Image object ('gui/textbox.png') at 0x0000000003266c40>
+Kept <renpy.display.im.Image object ('gui/main_menu.png') at 0x0000000005d2ca60>
+Kept <renpy.display.im.Image object ('gui/game_menu.png') at 0x0000000005d2ce20>
+Kept <renpy.display.im.Image object ('gui/overlay/game_menu.png') at 0x0000000005904eb0>
+Kept <renpy.display.im.Image object ('gui/button/radio_foreground.png') at 0x0000000005d8c1c0>
+Kept <renpy.display.im.Image object ('gui/button/radio_selected_foreground.png') at 0x0000000005d8ed00>
+Kept <renpy.display.im.Image object ('gui/button/check_foreground.png') at 0x0000000005d8e670>
+Kept <renpy.display.im.Image object ('gui/button/check_selected_foreground.png') at 0x0000000005d8eb50>
+Kept <renpy.display.im.Image object ('gui/slider/horizontal_idle_thumb.png') at 0x0000000005d8e040>
+Kept <renpy.display.im.Image object ('gui/slider/horizontal_hover_thumb.png') at 0x0000000005d8e1c0>

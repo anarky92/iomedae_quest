@@ -1,8 +1,10 @@
 ﻿# Tech stuff
 
 #define config.automatic_images = [ '\\', ':', '_', '-', '/' ]
-define config.automatic_images = [ '/' ]
+# define config.automatic_images = [ '/' ]
+define config.automatic_images_minimum_components = 1
 define config.automatic_images_strip = [ "images" ]
+define config.debug_image_cache = "debug.txt"
 
 # Определение персонажей игры:
 
@@ -16,7 +18,7 @@ define heal = Character('Мастер медицины', color="#c3f243")
 define ulm = Character('Ульм', color="#d3be53")
 define ngrd = Character('Ночной стражник', color="#530bd3")
 define cook = Character('Повар', color="#e95502")
-#define castellan = Character(castellannpc.name, color="#c80f08")
+define castellan = Character("Кастелян", color="#c80f08")
 define DEBUG = True
 
 # Настройки по умолчанию
@@ -164,7 +166,8 @@ label start:
             alias = None,
             pic = "castellan",
             questlist = [],
-            textcolor = "#c80f08"
+            textcolor = "#c80f08",
+            charobject = castellan
         )
 
         randal = CharClass(
@@ -200,7 +203,8 @@ label start:
             alias = None,
             pic = None,
             questlist = [],
-            textcolor = "#c8ffc8"
+            textcolor = "#c8ffc8",
+            charobject = r
         )
 
 

@@ -1,34 +1,34 @@
 ﻿I'm sorry, but an uncaught exception occurred.
 
 While running game code:
-  File "script.rpy", line 250, in script call
+  File "script.rpy", line 252, in script call
     call monastry_map_loc
-  File "script.rpy", line 265, in script call
+  File "script.rpy", line 267, in script call
     call screen monastry_map
-  File "add.rpy", line 731, in script
-    $ renpy.say(renpy.character(person_to_interact.name, color=person_to_interact.textcolor), "Здравствуй, Рэнадл!")
-  File "add.rpy", line 731, in <module>
-    $ renpy.say(renpy.character(person_to_interact.name, color=person_to_interact.textcolor), "Здравствуй, Рэнадл!")
+  File "add.rpy", line 737, in script
+    python:
+  File "add.rpy", line 740, in <module>
+    renpy.say(renpy.character(person_to_interact.name, color=person_to_interact.textcolor), "Здравствуй, Рэнадл!")
 TypeError: 'module' object is not callable
 
 -- Full Traceback ------------------------------------------------------------
 
 Full traceback:
-  File "script.rpy", line 250, in script call
+  File "script.rpy", line 252, in script call
     call monastry_map_loc
-  File "script.rpy", line 265, in script call
+  File "script.rpy", line 267, in script call
     call screen monastry_map
-  File "add.rpy", line 731, in script
-    $ renpy.say(renpy.character(person_to_interact.name, color=person_to_interact.textcolor), "Здравствуй, Рэнадл!")
+  File "add.rpy", line 737, in script
+    python:
   File "D:\renpy-8.0.2-sdk\renpy\ast.py", line 1131, in execute
     renpy.python.py_exec_bytecode(self.code.bytecode, self.hide, store=self.store)
   File "D:\renpy-8.0.2-sdk\renpy\python.py", line 1052, in py_exec_bytecode
     exec(bytecode, globals, locals)
-  File "add.rpy", line 731, in <module>
-    $ renpy.say(renpy.character(person_to_interact.name, color=person_to_interact.textcolor), "Здравствуй, Рэнадл!")
+  File "add.rpy", line 740, in <module>
+    renpy.say(renpy.character(person_to_interact.name, color=person_to_interact.textcolor), "Здравствуй, Рэнадл!")
 TypeError: 'module' object is not callable
 
 Windows-10-10.0.19042 AMD64
 Ren'Py 8.0.2.22081402
 randal_may_monastry 1.0
-Mon Aug 22 01:31:42 2022
+Tue Aug 23 01:00:27 2022

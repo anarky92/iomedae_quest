@@ -2,9 +2,13 @@
 errors listed below, and try again.
 
 
-File "add.rpy", line 694: expected a keyword argument, colon, or end of line.
-    imagebutton auto (location_object.pic + "/" + location_objec.doors[i].pic + "_%s.png") focus_mask True action Jump "[doorway]"
-                                                                                                                       ^
+File "add.rpy", line 713: invalid syntax
+    
+    
+
+File "add.rpy", line 738: invalid syntax
+    
+    
 
 Ren'Py Version: Ren'Py 8.0.2.22081402
-Mon Aug 22 01:19:52 2022
+Tue Aug 23 01:00:03 2022
