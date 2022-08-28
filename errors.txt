@@ -2,9 +2,10 @@
 errors listed below, and try again.
 
 
-File "game/script.rpy", line 6: expected statement.
-    config.debug_image_cache = True
-                             ^
+File "game/script.rpy", line 493: invalid syntax
+    LocDict {
+             ^
+    
 
 Ren'Py Version: Ren'Py 8.0.2.22081402
-Fri Aug 26 00:15:34 2022
+Sun Aug 28 23:38:06 2022

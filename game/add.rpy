@@ -1,13 +1,53 @@
 # Служебные функции
 
 init python:
+
+    r = Character("Рэндал", color="#c8ffc8")
+    e = Character('Амариэ', color="#c800c8")
+    l = Character('Мастер Сеймур', color="#0088c8")
+    i = Character('Иган', color="#AA00FF")
+    sbs = Character('Себастьян', color="#33DD00")
+    ber = Character('Капитан Бер', color="#cfd483")
+    heal = Character('Мастер медицины', color="#c3f243")
+    ulm = Character('Ульм', color="#d3be53")
+    ngrd = Character('Ночной стражник', color="#530bd3")
+    cook = Character('Повар', color="#e95502")
+    castellan = Character("Кастелян", color="#c80f08")
+    templeguard = Character("Берн Кендрик", color="#142897")
+    celsius = Character("Мастер Цельсий", color="#079634")
+    tomash = Character("Мастер Томаш", color="#ff0000")
+
     # TO DO add descriptions from JSON & create data structures for locationinfo, questinfo etc.
 
-    renpy.image("storage_bg", Image("storage/storage_bg.png"))
-    renpy.image("castellan_idle", Image("castellan/castellan_idle.png"))
-    renpy.image("castellan_coins_idle", Image("storage/castellan_coins_idle.png"))
-    renpy.image("castellan_coins", Image("items/castellan_coins.png"))
+    renpy.image("storage_storage_bg", Image("storage/storage_bg.png"))
+    renpy.image("castellan_castellan_idle", Image("castellan/castellan_idle.png"))
+    renpy.image("castellan_castellan_talk", Image("castellan/castellan_talk.png"))
+    renpy.image("storage_castellan_coins_idle", Image("storage/castellan_coins_idle.png"))
+    renpy.image("items_castellan_coins", Image("items/castellan_coins.png"))
     renpy.image("storage_go_back_idle", Image("storage/go_back_idle.png"))
+
+    # Temple corridor
+    renpy.image("temple_corridor_temple_corridor_bg", Image("temple_corridor/temple_corridor_bg.png"))
+    renpy.image("temple_corridor_go_back_idle", Image("temple_corridor/go_back_idle.png"))
+    renpy.image("temple_corridor_administration_enterance_idle", Image("temple_corridor/administration_enterance_idle.png"))
+    renpy.image("temple_corridor_temple_entrance_idle", Image("temple_corridor/temple_entrance_idle.png"))
+    renpy.image("celsius_celsius_idle", Image("celsius/celsius_idle.png"))
+    renpy.image("celsius_celsius_talk", Image("celsius/celsius_talk.png"))
+    renpy.image("guard_temple_guard_temple_talk", Image("guard_temple/guard_temple_talk.png"))
+    renpy.image("guard_temple_guard_temple_idle", Image("guard_temple/guard_temple_idle.png"))
+
+    # Temple
+    renpy.image("temple_temple_bg", Image("temple/temple_bg.png"))
+    renpy.image("temple_go_back_idle", Image("temple/go_back_idle.png"))
+    renpy.image("temple_temple_altar_entrance_idle", Image("temple/temple_altar_entrance_idle.png"))
+    renpy.image("tomash_tomash_idle", Image("tomash/tomash_idle.png"))
+    renpy.image("tomash_tomash_talk", Image("tomash/tomash_talk.png"))
+    
+    # Altar
+    renpy.image("altar_altar_bg", Image("altar/altar_bg.png"))
+    renpy.image("altar_go_back_idle", Image("altar/go_back_idle.png"))
+    renpy.image("altar_iomedae_grand_monument_idle", Image("altar/iomedae_grand_monument_idle.png"))
+    renpy.image("items_iomedae_grand_monument", Image("items/iomedae_grand_monument.png"))
 
     def GetItemDescrText (ItemName):
 
@@ -86,6 +126,7 @@ init python:
             self.icon = kwargs['icon']
             self.pic = kwargs['pic']
             self.latch = False
+            self.can_be_taken = kwargs['can_be_taken']
 
         def IsBroken (self):
             if self.hp <= 0:
@@ -123,6 +164,7 @@ init python:
     items_descr_dict['Longsword'] = 'Ordinary two handed longsword. VERY long'
     items_descr_dict['Healing potion'] = 'Ordinary healing potion'
     items_descr_dict['Golden coin'] = 'Обычная золотая монета'
+    items_descr_dict['IomedaeAltarStatue'] = 'Охренительно большя статуя Иомедей'
 
     work_energy_cost["easy"] = 4
     work_energy_cost["hard"] = 10
@@ -336,21 +378,21 @@ init python:
 
     def ShowLocationPic (location):
         renpy.scene()
-        _text_buffer = location.pic +  "_bg"
+        _text_buffer = location.pic + "_" + location.pic +  "_bg"
         renpy.show(_text_buffer)
         if location.doors != []:
             for i in range(len(location.doors)):
-                _text_buffer = location.doors[i].pic + "_idle"
+                _text_buffer = location.pic + "_" + location.doors[i].pic + "_idle"
                 renpy.show(_text_buffer, zorder = 2)
 
         if location.npcs != []:
             for i in range(len(location.npcs)):
-                _text_buffer = location.npcs[i].pic + "_idle"
+                _text_buffer = location.npcs[i].pic + "_" + location.npcs[i].pic + "_idle"
                 renpy.show(_text_buffer, zorder = 2)
 
         if location.objects != []:
             for i in range(len(location.objects)):
-                _text_buffer = location.objects[i].pic + "_idle"
+                _text_buffer = location.pic + "_" + location.objects[i].pic + "_idle"
                 renpy.show(_text_buffer, zorder = 4)
 
         return 0
@@ -425,8 +467,9 @@ screen monastry_map:
         hotspot (1263,768,154,51) action Call ("interloc_time_advance", "hopital_loc") # Больница
         hotspot (1491,105,104,50) action Call ("interloc_time_advance", "main_gates_loc") # Мельница
         hotspot (552,757,115,52):
-            action [SetVariable("location_object", StorageLocation), Call("location_abstract")]
-#             action Call ("location_abstract") $ location_object = StorageLocation # Склад
+            action [SetVariable("location_object", StorageLocation), Call("location_abstract")] # Склад
+        hotspot(1028,113,105,54):
+            action [SetVariable("location_object", TempleCorridorLocation), Call("location_abstract")]  # Храм
         # hotspot (353,140,157,56) action Jump ("start") # Гостевой дом
         # hotspot (685,76,270,52) action Jump ("start") # Дом преподавателей
         # hotspot (394,526,139,53) action Jump ("start") # Трапезная
@@ -679,6 +722,11 @@ label inventory_item_del(RmItemKey):
 
 label location_abstract:
 
+    # Temp hack
+    python:
+        if location_object == StubLocation:
+            renpy.call("monastry_map_loc")
+
     $ ShowLocationPic(location_object)
 
     if location_object.visited  == False:
@@ -696,12 +744,12 @@ label location_abstract:
         if location_object.objects != []:
             for i in range(len(location_object.objects)):
                 $ object_to_interact = location_object.objects[i]
-                imagebutton auto (location_object.name + "/" + location_object.objects[i].pic + "_%s.png") focus_mask True action [SetVariable("object_to_interact", location_object.objects[i]), Jump ("object_interact_abstract")]
+                imagebutton auto (location_object.pic + "/" + location_object.objects[i].pic + "_%s.png") focus_mask True action [SetVariable("object_to_interact", location_object.objects[i]), Jump ("object_interact_abstract")]
 
         if location_object.doors != []:
             for i in range(len(location_object.doors)):
                 $ doorway = location_object.doors[i].way_to
-                imagebutton auto (location_object.pic + "/" + location_object.doors[i].pic + "_%s.png") focus_mask True action Jump(doorway)
+                imagebutton auto (location_object.pic + "/" + location_object.doors[i].pic + "_%s.png") focus_mask True action [SetVariable("location_object", LocDict[location_object.doors[i].way_to]), Call("location_abstract")]
 
         imagebutton auto "ui/map_button_%s.png" focus_mask True action Jump ("monastry_map_loc")
 
@@ -711,9 +759,6 @@ label object_interact_abstract:
 
     $ itempic = object_to_interact.pic
     $ renpy.show(itempic, zorder = 6)
-#     image itemimage = "[itempic]"
-#     show itemimage zorder 6
-
 
     python:
         if object_to_interact.latch == False:
@@ -731,13 +776,14 @@ label object_interact_abstract:
         "Сломать":
             r "Это как?"
             jump object_interact_abstract
-
+        "Ну и хрен с ним":
+            jump location_abstract
 label dialoge_abstract():
 
     python:
         ShowLocationPic(location_object)
-        renpy.hide (person_to_interact.pic + " " +  person_to_interact.pic + "_idle")
-        renpy.show (person_to_interact.pic + " " +  person_to_interact.pic + "_talk")
+        renpy.hide (person_to_interact.pic + "_" +  person_to_interact.pic + "_idle")
+        renpy.show (person_to_interact.pic + "_" +  person_to_interact.pic + "_talk", zorder = 6)
 
     # r "Добрый день!"
     python:

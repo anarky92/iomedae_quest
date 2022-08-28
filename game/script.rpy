@@ -8,17 +8,20 @@ define config.debug_image_cache = "debug.txt"
 
 # Определение персонажей игры:
 
-define r = Character("Рэндал", color="#c8ffc8")
-define e = Character('Амариэ', color="#c800c8")
-define l = Character('Мастер Сеймур', color="#0088c8")
-define i = Character('Иган', color="#AA00FF")
-define sbs = Character('Себастьян', color="#33DD00")
-define ber = Character('Капитан Бер', color="#cfd483")
-define heal = Character('Мастер медицины', color="#c3f243")
-define ulm = Character('Ульм', color="#d3be53")
-define ngrd = Character('Ночной стражник', color="#530bd3")
-define cook = Character('Повар', color="#e95502")
-define castellan = Character("Кастелян", color="#c80f08")
+# define r = Character("Рэндал", color="#c8ffc8")
+# define e = Character('Амариэ', color="#c800c8")
+# define l = Character('Мастер Сеймур', color="#0088c8")
+# define i = Character('Иган', color="#AA00FF")
+# define sbs = Character('Себастьян', color="#33DD00")
+# define ber = Character('Капитан Бер', color="#cfd483")
+# define heal = Character('Мастер медицины', color="#c3f243")
+# define ulm = Character('Ульм', color="#d3be53")
+# define ngrd = Character('Ночной стражник', color="#530bd3")
+# define cook = Character('Повар', color="#e95502")
+# define castellan = Character("Кастелян", color="#c80f08")
+# define templeguard = Character("Берн Кендрик", color="#142897")
+# define celsius = Character("Мастер Цельсий", color="#079634")
+# define tomash = Character("Мастер Томаш", color="#ff0000")
 define DEBUG = True
 
 # Настройки по умолчанию
@@ -91,18 +94,18 @@ label start:
 
         # Something strange here
         temDict = {   'alch_fire' : "blabla",
-                           'clothes_ofic' : "blabla",
-                           'dagger' : "blabla",
-                           'flask' : "blabla",
-                           'harrow_deck' : "blabla",
-                           'heal' : "blabla",
-                           'key_randal' : "blabla",
-                           'lamp' : "blabla",
-                           'monk_robe' : "blabla",
-                           'pouch' : "blabla",
-                           'rum_bottle' : "blabla",
-                           'water' : "blabla"}
-
+                        'clothes_ofic' : "blabla",
+                        'dagger' : "blabla",
+                        'flask' : "blabla",
+                        'harrow_deck' : "blabla",
+                        'heal' : "blabla",
+                        'key_randal' : "blabla",
+                        'lamp' : "blabla",
+                        'monk_robe' : "blabla",
+                        'pouch' : "blabla",
+                        'rum_bottle' : "blabla",
+                        'water' : "blabla"}
+                        
         castallanmonkeycreature = CreatureClass(
             hp = 100,
             magic = False,
@@ -207,6 +210,186 @@ label start:
             charobject = r
         )
 
+        templeguardnpc = CharClass(
+            hp = 100,
+            magic = False,
+            material = True,
+            descr = "Молодой паладин Иомедей Берн Кендрик. Тот еще дуболом.",
+            name = templeguard.name,
+            force = 17,
+            dexterity = 15,
+            charisma = 6,
+            intellect = 5,
+            abils = ["Ordinary weapon", "Heavy weapon"],
+            weight = 90,
+            size = "middle",
+            hands = 2,
+            legs = 2,
+            heads = 1,
+            tails = 0,
+            nat_armor = 5,
+            speed = 20,
+            age = 20,
+            alignment = [85, 85],
+            cheerfulness = 100,
+            satiety = 100,
+            inventory = [],
+            hat = None,
+            clothes = None,
+            armor = None,
+            left_hand_item = None,
+            right_hand_item = None,
+            religion = "Iomedae",
+            alias = None,
+            pic = "guard_temple",
+            questlist = [],
+            textcolor = "#142897",
+            charobject = templeguard
+        )
+
+        celsiusnpc = CharClass(
+            hp = 100,
+            magic = False,
+            material = True,
+            descr = "Местный мастер-алхимик Цельсий",
+            name = celsius.name,
+            force = 8,
+            dexterity = 8,
+            charisma = 15,
+            intellect = 20,
+            abils = ["Ordinary weapon", "Heavy weapon"],
+            weight = 70,
+            size = "middle",
+            hands = 2,
+            legs = 2,
+            heads = 1,
+            tails = 0,
+            nat_armor = 5,
+            speed = 20,
+            age = 40,
+            alignment = [85, 85],
+            cheerfulness = 100,
+            satiety = 100,
+            inventory = [],
+            hat = None,
+            clothes = None,
+            armor = None,
+            left_hand_item = None,
+            right_hand_item = None,
+            religion = "Iomedae",
+            alias = None,
+            pic = "celsius",
+            questlist = [],
+            textcolor = "#079634",
+            charobject = celsius
+        )
+
+        tomashnpc = CharClass(
+            hp = 100,
+            magic = False,
+            material = True,
+            descr = "Мастер следственного дела Томаш",
+            name = tomash.name,
+            force = 12,
+            dexterity = 15,
+            charisma = 20,
+            intellect = 25,
+            abils = ["Ordinary weapon", "Heavy weapon"],
+            weight = 80,
+            size = "middle",
+            hands = 2,
+            legs = 2,
+            heads = 1,
+            tails = 0,
+            nat_armor = 5,
+            speed = 20,
+            age = 60,
+            alignment = [85, 25],
+            cheerfulness = 100,
+            satiety = 100,
+            inventory = [],
+            hat = None,
+            clothes = None,
+            armor = None,
+            left_hand_item = None,
+            right_hand_item = None,
+            religion = "Iomedae",
+            alias = None,
+            pic = "tomash",
+            questlist = [],
+            textcolor = "#ff0000",
+            charobject = tomash
+        )
+
+        templecorridoorexit = DoorObjectClass(
+            way_to = "StubLocation",
+            closed = False,
+            locked = False,
+            lock_difficulty = None,
+            strength = None,
+            descr = "Выход во двор монастря из коридора храма",
+            pic = "go_back"
+        )
+
+        admindoorenter = DoorObjectClass(
+            way_to = "StubLocation",
+            closed = True,
+            locked = True,
+            lock_difficulty = 100,
+            strength = 100,
+            descr = "Вход в административные помещения",
+            pic = "administration_enterance"
+        )     
+
+        templedoorenter = DoorObjectClass(
+            way_to = "TempleLocation",
+            closed = False,
+            locked = False,
+            lock_difficulty = None,
+            strength = None,
+            descr = "Выход во двор монастря из коридора храма",
+            pic = "temple_entrance"
+        )    
+
+        templeexit = DoorObjectClass(
+            way_to = "TempleCorridorLocation",
+            closed = False,
+            locked = False,
+            lock_difficulty = None,
+            strength = None,
+            descr = "Выход из храма в коридор",
+            pic = "go_back"
+        )   
+
+        altarenter = DoorObjectClass(
+            way_to = "AltarLocation",
+            closed = False,
+            locked = False,
+            lock_difficulty = None,
+            strength = None,
+            descr = "Вход в алтарь",
+            pic = "temple_altar_entrance"
+        ) 
+
+        altarexit = DoorObjectClass(
+            way_to = "TempleLocation",
+            closed = False,
+            locked = False,
+            lock_difficulty = None,
+            strength = None,
+            descr = "Выход из алтаря",
+            pic = "go_back"
+        )         
+
+        storageexit = DoorObjectClass(
+            way_to = "StubLocation",
+            closed = False,
+            locked = False,
+            lock_difficulty = None,
+            strength = None,
+            descr = "Выход во двор монастря со склада",
+            pic = "go_back"
+        )
 
         GoldenCoin = CoinClass(
             hp = 10,
@@ -219,25 +402,52 @@ label start:
             effect = 25,
             effect_type = "Phys damage",
             stat_req = [15, 6, 0, 0],
-            abil_req = ["Ordinary weapon", "Heavy weapon"],
+            abil_req = [],
             solidity = 10,
             fragile = False,
             weight = 7,
             hands_req = 2,
             icon = "golden_coin_",
-            pic = "golden_coin"
+            pic = "golden_coin",
+            can_be_taken = True
+        )
+
+        IomedaeAltarStatue = CoinClass(
+            hp = 1000,
+            cost = 100000,
+            magic = True,
+            material = "stone",
+            owner = None,
+            descr = items_descr_dict["Golden coin"],
+            name = "Статуя Иомедей главного храма монастыря",
+            effect = 0,
+            effect_type = None,
+            stat_req = [0, 0, 0, 0],
+            abil_req = [],
+            solidity = 10,
+            fragile = False,
+            weight = 7,
+            hands_req = 2,
+            icon = None,
+            pic = "iomedae_grand_monument",
+            can_be_taken = True
         )
 
         CastellanGoldenBunch = ItemBunchClass(GoldenCoin, 100, "castellan_coins")
 
-        storageexit = DoorObjectClass(
-            way_to = "monastry_map_loc",
-            closed = False,
-            locked = False,
-            lock_difficulty = None,
-            strength = None,
-            descr = "Выход во двор монастря со склада",
-            pic = "go_back"
+        ###############################################################
+        ########################## Locations ##########################
+        ###############################################################
+
+
+        StubLocation = LocationClass(
+            name = "Заглушка",
+            animals = [],
+            npcs = [],
+            doors = [],
+            objects = [],
+            loc_description = "Костыль",
+            pic = None
         )
 
         StorageLocation = LocationClass(
@@ -249,6 +459,43 @@ label start:
             loc_description = "Склад! Надо будет найти способ наведаться сюда без свидетелей...",
             pic = "storage"
         )
+
+        TempleCorridorLocation = LocationClass(
+            name = "Коридор перед входом в главный храм",
+            animals = [],
+            npcs = [templeguardnpc, celsiusnpc],
+            doors = [templecorridoorexit, admindoorenter, templedoorenter],
+            objects = [],
+            loc_description = "Из центрального прохода тянет ладаном, наверное там храм. А что за плотная дверь за дуболомом справа непонятно...",
+            pic = "temple_corridor"
+        )
+
+        TempleLocation = LocationClass(
+            name = "Главный храм Иомедей",
+            animals = [],
+            npcs = [tomashnpc],
+            doors = [templeexit, altarenter],
+            objects = [],
+            loc_description = "Нихрена себе храм!",
+            pic = "temple"
+        )    
+
+        AltarLocation = LocationClass(
+            name = "Алтарь Иомедей",
+            animals = [],
+            npcs = [],
+            doors = [altarexit],
+            objects = [IomedaeAltarStatue],
+            loc_description = "Серьёзная такая богиня конечно у них...",
+            pic = "altar"
+        )
+
+        LocDict = dict()
+        LocDict["StubLocation"] = StubLocation
+        LocDict["StorageLocation"] = StorageLocation
+        LocDict["TempleCorridorLocation"] = TempleCorridorLocation
+        LocDict["TempleLocation"] = TempleLocation
+        LocDict["AltarLocation"] = AltarLocation
 
     if DEBUG==True:
         call monastry_map_loc

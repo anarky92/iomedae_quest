@@ -1,82 +1,46 @@
 ﻿I'm sorry, but an uncaught exception occurred.
 
 While running game code:
-  File "game/script.rpy", line 254, in script call
+  File "game/script.rpy", line 501, in script call
     call monastry_map_loc
-  File "game/script.rpy", line 269, in script call
+  File "game/script.rpy", line 516, in script call
     call screen monastry_map
-  File "game/add.rpy", line 691, in script
+  File "game/add.rpy", line 737, in script call
     call screen show_location_items
-  File "renpy/common/000statements.rpy", line 609, in execute_call_screen
-    store._return = renpy.call_screen(name, *args, **kwargs)
-  File "game/add.rpy", line 693, in execute
-    screen show_location_items:
-  File "game/add.rpy", line 693, in execute
-    screen show_location_items:
-  File "game/add.rpy", line 698, in execute
-    if location_object.objects != []:
-  File "game/add.rpy", line 699, in execute
-    for i in range(len(location_object.objects)):
-  File "game/add.rpy", line 701, in execute
-    imagebutton auto (location_object.name + "/" + location_object.objects[i].pic + "_%s.png") focus_mask True action [SetVariable("object_to_interact", location_object.objects[i]), Jump ("object_interact_abstract")]
-Exception: Imagebutton does not have a idle image. (auto='full/castellan_coins_%s.png').
+  File "game/add.rpy", line 737, in script call
+    call screen show_location_items
+  File "game/add.rpy", line 737, in script call
+    call screen show_location_items
+  File "game/add.rpy", line 726, in script
+    python:
+  File "game/add.rpy", line 728, in <module>
+    renpy.call(monastry_map_loc)
+NameError: name 'monastry_map_loc' is not defined
 
 -- Full Traceback ------------------------------------------------------------
 
 Full traceback:
-  File "game/script.rpy", line 254, in script call
+  File "game/script.rpy", line 501, in script call
     call monastry_map_loc
-  File "game/script.rpy", line 269, in script call
+  File "game/script.rpy", line 516, in script call
     call screen monastry_map
-  File "game/add.rpy", line 691, in script
+  File "game/add.rpy", line 737, in script call
     call screen show_location_items
-  File "D:\renpy-8.0.2-sdk\renpy\ast.py", line 2232, in execute
-    self.call("execute")
-  File "D:\renpy-8.0.2-sdk\renpy\ast.py", line 2220, in call
-    return renpy.statements.call(method, parsed, *args, **kwargs)
-  File "D:\renpy-8.0.2-sdk\renpy\statements.py", line 281, in call
-    return method(parsed, *args, **kwargs)
-  File "renpy/common/000statements.rpy", line 609, in execute_call_screen
-    store._return = renpy.call_screen(name, *args, **kwargs)
-  File "D:\renpy-8.0.2-sdk\renpy\exports.py", line 3174, in call_screen
-    rv = renpy.ui.interact(mouse="screen", type="screen", roll_forward=roll_forward)
-  File "D:\renpy-8.0.2-sdk\renpy\ui.py", line 299, in interact
-    rv = renpy.game.interface.interact(roll_forward=roll_forward, **kwargs)
-  File "D:\renpy-8.0.2-sdk\renpy\display\core.py", line 3377, in interact
-    repeat, rv = self.interact_core(preloads=preloads, trans_pause=trans_pause, pause=pause, pause_start=pause_start, **kwargs) # type: ignore
-  File "D:\renpy-8.0.2-sdk\renpy\display\core.py", line 3804, in interact_core
-    root_widget.visit_all(lambda i : i.per_interact())
-  File "D:\renpy-8.0.2-sdk\renpy\display\core.py", line 582, in visit_all
-    d.visit_all(callback, seen)
-  File "D:\renpy-8.0.2-sdk\renpy\display\core.py", line 582, in visit_all
-    d.visit_all(callback, seen)
-  File "D:\renpy-8.0.2-sdk\renpy\display\core.py", line 582, in visit_all
-    d.visit_all(callback, seen)
-  File "D:\renpy-8.0.2-sdk\renpy\display\screen.py", line 451, in visit_all
-    callback(self)
-  File "D:\renpy-8.0.2-sdk\renpy\display\core.py", line 3804, in <lambda>
-    root_widget.visit_all(lambda i : i.per_interact())
-  File "D:\renpy-8.0.2-sdk\renpy\display\screen.py", line 462, in per_interact
-    self.update()
-  File "D:\renpy-8.0.2-sdk\renpy\display\screen.py", line 653, in update
-    self.screen.function(**self.scope)
-  File "game/add.rpy", line 693, in execute
-    screen show_location_items:
-  File "game/add.rpy", line 693, in execute
-    screen show_location_items:
-  File "game/add.rpy", line 698, in execute
-    if location_object.objects != []:
-  File "game/add.rpy", line 699, in execute
-    for i in range(len(location_object.objects)):
-  File "game/add.rpy", line 701, in execute
-    imagebutton auto (location_object.name + "/" + location_object.objects[i].pic + "_%s.png") focus_mask True action [SetVariable("object_to_interact", location_object.objects[i]), Jump ("object_interact_abstract")]
-  File "D:\renpy-8.0.2-sdk\renpy\ui.py", line 952, in _imagebutton
-    idle = choice(idle, idle_image, "idle", required=True)
-  File "D:\renpy-8.0.2-sdk\renpy\ui.py", line 946, in choice
-    raise Exception("Imagebutton does not have a %s image. (auto=%r)." % (name, auto))
-Exception: Imagebutton does not have a idle image. (auto='full/castellan_coins_%s.png').
+  File "game/add.rpy", line 737, in script call
+    call screen show_location_items
+  File "game/add.rpy", line 737, in script call
+    call screen show_location_items
+  File "game/add.rpy", line 726, in script
+    python:
+  File "D:\renpy-8.0.2-sdk\renpy\ast.py", line 1131, in execute
+    renpy.python.py_exec_bytecode(self.code.bytecode, self.hide, store=self.store)
+  File "D:\renpy-8.0.2-sdk\renpy\python.py", line 1052, in py_exec_bytecode
+    exec(bytecode, globals, locals)
+  File "game/add.rpy", line 728, in <module>
+    renpy.call(monastry_map_loc)
+NameError: name 'monastry_map_loc' is not defined
 
 Windows-10-10.0.19042 AMD64
 Ren'Py 8.0.2.22081402
 randal_may_monastry 1.0
-Fri Aug 26 01:16:06 2022
+Sun Aug 28 23:46:12 2022
